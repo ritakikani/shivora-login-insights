@@ -111,6 +111,10 @@ git clone https://github.com/ritakikani/shivora-login-insights.git
 
 Install the plugin into your WordPress environment and activate it for testing.
 
+## ❤️ Support Development
+
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support-yellow?logo=buymeacoffee)](https://buymeacoffee.com/sanganireeta)
+
 ## 📝 Changelog
 
 ### Version 1.0.0

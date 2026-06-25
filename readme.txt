@@ -1,6 +1,7 @@
 === Shivora Login Insights ===
 Contributors: kikanirita
-Tags: users, login, last login, user management, inactive users, admin tools
+Donate link: https://buymeacoffee.com/sanganireeta
+Tags: login, last login, users, user activity, user management
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
@@ -95,6 +96,12 @@ Yes. The plugin includes an uninstall routine that removes plugin data when dele
 = Is the plugin multisite compatible? =
 
 Compatibility depends on your installation and configuration. Testing is recommended before production deployment.
+
+== Support ==
+
+If Shivora Login Insights has been helpful, you can support future development by buying me a coffee:
+
+https://buymeacoffee.com/sanganireeta
 
 == Screenshots ==
 
