@@ -85,7 +85,7 @@ class SLI_Helper {
 	 */
 	public static function format_login_date( $timestamp ) {
 		if ( empty( $timestamp ) ) {
-			return __( 'Never', 'shivora-login-insight' );
+			return __( 'Never', 'shivora-login-insights' );
 		}
 		return wp_date(
 			get_option( 'date_format' ) . ' ' . get_option( 'time_format' ),

@@ -45,7 +45,7 @@ class SLI_Admin_Menu {
 	 *
 	 * Creates:
 	 *
-	 * Last Login Tracker
+	 * Login Insights
 	 * ├── Dashboard
 	 * ├── Inactive Users
 	 * ├── Export
@@ -57,8 +57,8 @@ class SLI_Admin_Menu {
 	 */
 	public function register_menu() {
 		add_menu_page(
-			__( 'Last Login Tracker', 'shivora-login-insight' ),
-			__( 'Last Login Tracker', 'shivora-login-insight' ),
+			__( 'Login Insights', 'shivora-login-insights' ),
+			__( 'Login Insights', 'shivora-login-insights' ),
 			'list_users',
 			'sli-overview',
 			array(
@@ -87,14 +87,14 @@ class SLI_Admin_Menu {
 
 		<div class="wrap">
 			<h1>
-				<?php esc_html_e('Last Login Tracker', 'shivora-login-insight'); ?>
+				<?php esc_html_e('Login Insights', 'shivora-login-insights'); ?>
 			</h1>
 
 			<table class="widefat striped">
 				<tbody>
 					<tr>
 						<th>
-							<?php esc_html_e('Total Users',	'shivora-login-insight'); ?>
+							<?php esc_html_e('Total Users',	'shivora-login-insights'); ?>
 						</th>
 						<td>
 							<?php echo esc_html($total_users['total_users']); ?>
@@ -102,7 +102,7 @@ class SLI_Admin_Menu {
 					</tr>
 					<tr>
 						<th>
-							<?php esc_html_e('Logged In Today', 'shivora-login-insight'); ?>
+							<?php esc_html_e('Logged In Today', 'shivora-login-insights'); ?>
 						</th>
 						<td>
 							<?php echo esc_html($logged_today); ?>
@@ -110,7 +110,7 @@ class SLI_Admin_Menu {
 					</tr>
 					<tr>
 						<th>
-							<?php esc_html_e('Never Logged In',	'shivora-login-insight'); ?>
+							<?php esc_html_e('Never Logged In',	'shivora-login-insights'); ?>
 						</th>
 						<td>
 							<?php echo esc_html( $never_logged_in ); ?>
@@ -118,7 +118,7 @@ class SLI_Admin_Menu {
 					</tr>
 					<tr>
 						<th>
-							<?php esc_html_e('Inactive 30 Days',	'shivora-login-insight'); ?>
+							<?php esc_html_e('Inactive 30 Days',	'shivora-login-insights'); ?>
 						</th>
 						<td>
 							<?php echo esc_html($inactive_30); ?>
@@ -126,7 +126,7 @@ class SLI_Admin_Menu {
 					</tr>
 					<tr>
 						<th>
-							<?php esc_html_e('Inactive 60 Days',	'shivora-login-insight'); ?>
+							<?php esc_html_e('Inactive 60 Days',	'shivora-login-insights'); ?>
 						</th>
 						<td>
 							<?php echo esc_html($inactive_60); ?>
@@ -134,7 +134,7 @@ class SLI_Admin_Menu {
 					</tr>
 					<tr>
 						<th>
-							<?php esc_html_e( 'Inactive 90 Days',	'shivora-login-insight' ); ?>
+							<?php esc_html_e( 'Inactive 90 Days',	'shivora-login-insights' ); ?>
 						</th>
 						<td>
 							<?php echo esc_html($inactive_90); ?>

@@ -51,8 +51,8 @@ class SLI_Inactive_Users_Page {
 	public function register_submenu() {
 		add_submenu_page(
 			'sli-overview',
-			__( 'Inactive Users', 'shivora-login-insight' ),
-			__( 'Inactive Users', 'shivora-login-insight' ),
+			__( 'Inactive Users', 'shivora-login-insights' ),
+			__( 'Inactive Users', 'shivora-login-insights' ),
 			'list_users',
 			'sli-inactive-users',
 			array(
@@ -87,36 +87,36 @@ class SLI_Inactive_Users_Page {
 
 		<div class="wrap">
 			<h1>
-				<?php esc_html_e('Inactive Users', 'shivora-login-insight'); ?>
+				<?php esc_html_e('Inactive Users', 'shivora-login-insights'); ?>
 			</h1>
 
 			<form method="get">
 				<input type="hidden" name="page"	value="sli-inactive-users" />
 				<select name="days">
-					<option value="never"><?php esc_html_e('Never Logged In', 'shivora-login-insight'); ?></option>
-					<option value="30" <?php selected( $days, 30 ); ?>><?php esc_html_e('30 Days', 'shivora-login-insight'); ?></option>
-					<option value="60" <?php selected( $days, 60 ); ?>><?php esc_html_e('60 Days', 'shivora-login-insight'); ?></option>
-					<option value="90" <?php selected( $days, 90 ); ?>><?php esc_html_e('90 Days', 'shivora-login-insight'); ?></option>
-					<option value="180" <?php selected( $days, 180 ); ?>><?php esc_html_e('180 Days', 'shivora-login-insight'); ?></option>
+					<option value="never"><?php esc_html_e('Never Logged In', 'shivora-login-insights'); ?></option>
+					<option value="30" <?php selected( $days, 30 ); ?>><?php esc_html_e('30 Days', 'shivora-login-insights'); ?></option>
+					<option value="60" <?php selected( $days, 60 ); ?>><?php esc_html_e('60 Days', 'shivora-login-insights'); ?></option>
+					<option value="90" <?php selected( $days, 90 ); ?>><?php esc_html_e('90 Days', 'shivora-login-insights'); ?></option>
+					<option value="180" <?php selected( $days, 180 ); ?>><?php esc_html_e('180 Days', 'shivora-login-insights'); ?></option>
 				</select>
-				<?php submit_button(__( 'Filter', 'shivora-login-insight' ), 'secondary', '',	false); ?>
+				<?php submit_button(__( 'Filter', 'shivora-login-insights' ), 'secondary', '',	false); ?>
 			</form>
 			<br>
 
 			<table class="widefat striped">
 				<thead>
 					<tr>
-						<th><?php esc_html_e( 'User', 'shivora-login-insight' ); ?></th>
-						<th><?php esc_html_e( 'Email', 'shivora-login-insight' ); ?></th>
-						<th><?php esc_html_e( 'Last Login', 'shivora-login-insight' ); ?></th>
-						<th><?php esc_html_e( 'Login IP', 'shivora-login-insight' ); ?></th>
+						<th><?php esc_html_e( 'User', 'shivora-login-insights' ); ?></th>
+						<th><?php esc_html_e( 'Email', 'shivora-login-insights' ); ?></th>
+						<th><?php esc_html_e( 'Last Login', 'shivora-login-insights' ); ?></th>
+						<th><?php esc_html_e( 'Login IP', 'shivora-login-insights' ); ?></th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php if ( empty( $users ) ) : ?>
 						<tr>
 							<td colspan="4">
-								<?php esc_html_e('No inactive users found.', 'shivora-login-insight'); ?>
+								<?php esc_html_e('No inactive users found.', 'shivora-login-insights'); ?>
 							</td>
 						</tr>
 					<?php else : ?>

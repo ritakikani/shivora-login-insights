@@ -59,8 +59,8 @@ class SLI_Export {
 	public function register_submenu() {
 		add_submenu_page(
 			'sli-overview',
-			__( 'Export', 'shivora-login-insight' ),
-			__( 'Export', 'shivora-login-insight' ),
+			__( 'Export', 'shivora-login-insights' ),
+			__( 'Export', 'shivora-login-insights' ),
 			'list_users',
 			'sli-export',
 			array(
@@ -80,17 +80,17 @@ class SLI_Export {
 	public function render_page() { ?>
 		<div class="wrap">
 			<h1>
-				<?php esc_html_e('Export Login Activity', 'shivora-login-insight'); ?>
+				<?php esc_html_e('Export Login Activity', 'shivora-login-insights'); ?>
 			</h1>
 
 			<p>
-				<?php esc_html_e('Export all tracked login activity as a CSV file.', 'shivora-login-insight'); ?>
+				<?php esc_html_e('Export all tracked login activity as a CSV file.', 'shivora-login-insights'); ?>
 			</p>
 
 			<form method="post">
 				<?php wp_nonce_field('sli_export_users', 'sli_export_nonce');?>
 				<input type="hidden" name="sli_action" value="export_users" />
-				<?php submit_button(__( 'Export CSV', 'shivora-login-insight' )); ?>
+				<?php submit_button(__( 'Export CSV', 'shivora-login-insights' )); ?>
 			</form>
 
 		</div>

@@ -59,8 +59,8 @@ class SLI_Settings {
 	public function register_submenu() {
 		add_submenu_page(
 			'sli-overview',
-			__( 'Settings', 'shivora-login-insight' ),
-			__( 'Settings', 'shivora-login-insight' ),
+			__( 'Settings', 'shivora-login-insights' ),
+			__( 'Settings', 'shivora-login-insights' ),
 			'manage_options',
 			'sli-settings',
 			array(
@@ -129,7 +129,7 @@ class SLI_Settings {
 		$settings = SLI_Helper::get_settings(); ?>
 		<div class="wrap">
 			<h1>
-				<?php esc_html_e( 'Last Login Tracker Settings', 'shivora-login-insight'); ?>
+				<?php esc_html_e( 'Login Insights Settings', 'shivora-login-insights'); ?>
 			</h1>
 
 			<form method="post" action="options.php" >
@@ -137,46 +137,46 @@ class SLI_Settings {
 				<table class="form-table">
 					<tr>
 						<th scope="row">
-							<?php esc_html_e( 'Track Login IP', 'shivora-login-insight' ); ?>
+							<?php esc_html_e( 'Track Login IP', 'shivora-login-insights' ); ?>
 						</th>
 						<td>
 							<label>
 								<input type="checkbox" name="sli_settings[track_ip]" value="1" <?php checked($settings['track_ip'], 1); ?> />
-								<?php esc_html_e('Store user login IP address.',	'shivora-login-insight'); ?>
+								<?php esc_html_e('Store user login IP address.',	'shivora-login-insights'); ?>
 							</label>
 						</td>
 					</tr>
 
 					<tr>
 						<th scope="row">
-							<?php esc_html_e( 'Dashboard Widget',	'shivora-login-insight' ); ?>
+							<?php esc_html_e( 'Dashboard Widget',	'shivora-login-insights' ); ?>
 						</th>
 						<td>
 							<label>
 								<input type="checkbox" name="sli_settings[dashboard_widget]" value="1" <?php checked($settings['dashboard_widget'], 1); ?> />
-								<?php esc_html_e('Show dashboard widget.', 'shivora-login-insight' ); ?>
+								<?php esc_html_e('Show dashboard widget.', 'shivora-login-insights' ); ?>
 							</label>
 						</td>
 					</tr>
 
 					<tr>
 						<th scope="row">
-							<?php esc_html_e('Retention Period',	'shivora-login-insight'); ?>
+							<?php esc_html_e('Retention Period',	'shivora-login-insights'); ?>
 						</th>
 
 						<td>
 							<select	name="sli_settings[retention]">
 								<option value="30" <?php selected( $settings['retention'], '30' ); ?>>
-								    <?php esc_html_e('30 Days',	'shivora-login-insight'); ?>
+								    <?php esc_html_e('30 Days',	'shivora-login-insights'); ?>
 								</option>
 								<option value="60" <?php selected( $settings['retention'], '60' ); ?>>
-									<?php esc_html_e('60 Days',	'shivora-login-insight'); ?>
+									<?php esc_html_e('60 Days',	'shivora-login-insights'); ?>
 								</option>
 								<option value="90" <?php selected( $settings['retention'], '90' ); ?>>
-									<?php esc_html_e('90 Days',	'shivora-login-insight'); ?>
+									<?php esc_html_e('90 Days',	'shivora-login-insights'); ?>
 								</option>
 								<option value="forever" <?php selected( $settings['retention'], 'forever' ); ?>>
-									<?php esc_html_e('Forever',	'shivora-login-insight'); ?>
+									<?php esc_html_e('Forever',	'shivora-login-insights'); ?>
 								</option>
 							</select>
 						</td>

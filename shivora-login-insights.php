@@ -120,15 +120,9 @@ class SLI_Plugin {
 	 * @return void
 	 */
 	private function hooks() {
-
 		register_activation_hook(
 			__FILE__,
 			array( $this, 'activate' )
-		);
-
-		add_action(
-			'plugins_loaded',
-			array( $this, 'load_textdomain' )
 		);
 	}
 
@@ -224,26 +218,6 @@ class SLI_Plugin {
 	public function activate() {
 
 		SLI_Activator::activate();
-	}
-
-	/**
-	 * Load plugin translations.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return void
-	 */
-	public function load_textdomain() {
-
-		load_plugin_textdomain(
-			'shivora-login-insight',
-			false,
-			dirname(
-				plugin_basename(
-					__FILE__
-				)
-			) . '/languages'
-		);
 	}
 }
 

@@ -118,7 +118,7 @@ class SLI_REST_Controller {
 				'sli_user_not_found',
 				__(
 					'User not found.',
-					'shivora-login-insight'
+					'shivora-login-insights'
 				),
 				array(
 					'status' => 404,

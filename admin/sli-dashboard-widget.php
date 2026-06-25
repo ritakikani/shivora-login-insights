@@ -54,7 +54,7 @@ class SLI_Dashboard_Widget {
 		}
 		wp_add_dashboard_widget(
 			'sli_dashboard_widget',
-			__( 'Last Login Tracker', 'shivora-login-insight' ),
+			__( 'Login Insights', 'shivora-login-insights' ),
 			array( $this, 'render_widget' )
 		);
 	}
@@ -88,7 +88,7 @@ class SLI_Dashboard_Widget {
 			<tbody>
 				<tr>
 					<th>
-						<?php esc_html_e('Total Users', 'shivora-login-insight'); ?>
+						<?php esc_html_e('Total Users', 'shivora-login-insights'); ?>
 					</th>
 					<td>
 						<?php echo esc_html($total_users['total_users']); ?>
@@ -96,7 +96,7 @@ class SLI_Dashboard_Widget {
 				</tr>
 				<tr>
 					<th>
-						<?php esc_html_e('Logged In Today',	'shivora-login-insight'); ?>
+						<?php esc_html_e('Logged In Today',	'shivora-login-insights'); ?>
 					</th>
 					<td>
 						<?php echo esc_html($logged_today); ?>
@@ -104,7 +104,7 @@ class SLI_Dashboard_Widget {
 				</tr>
 				<tr>
 					<th>
-						<?php esc_html_e('Never Logged In', 'shivora-login-insight'); ?>
+						<?php esc_html_e('Never Logged In', 'shivora-login-insights'); ?>
 					</th>
 					<td>
 						<?php echo esc_html($never_logged_in); ?>
@@ -112,7 +112,7 @@ class SLI_Dashboard_Widget {
 				</tr>
 				<tr>
 					<th>
-						<?php esc_html_e('Inactive 30 Days',	'shivora-login-insight'); ?>
+						<?php esc_html_e('Inactive 30 Days',	'shivora-login-insights'); ?>
 					</th>
 					<td>
 						<?php echo esc_html($inactive_30); ?>
@@ -123,18 +123,18 @@ class SLI_Dashboard_Widget {
 
 		<?php if ( ! empty( $recent_users ) ) : ?>
 			<h4>
-				<?php esc_html_e('Recent Logins', 'shivora-login-insight'); ?>
+				<?php esc_html_e('Recent Logins', 'shivora-login-insights'); ?>
 			</h4>
 
 			<table class="widefat striped">
 				<thead>
 					<tr>
 						<th>
-							<?php esc_html_e('User',	'shivora-login-insight'); ?>
+							<?php esc_html_e('User',	'shivora-login-insights'); ?>
 						</th>
 
 						<th>
-							<?php esc_html_e('Last Login', 'shivora-login-insight'); ?>
+							<?php esc_html_e('Last Login', 'shivora-login-insights'); ?>
 						</th>
 					</tr>
 				</thead>
@@ -160,7 +160,7 @@ class SLI_Dashboard_Widget {
 		<?php endif; ?>
 		<p>
 			<a href="<?php echo esc_url( admin_url( 'users.php?page=sli-overview' ) ); ?>">
-				<?php esc_html_e('View Full Report',	'shivora-login-insight'); ?>
+				<?php esc_html_e('View Full Report',	'shivora-login-insights'); ?>
 			</a>
 		</p>
 		<?php

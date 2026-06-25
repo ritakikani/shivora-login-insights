@@ -65,13 +65,13 @@ class SLI_User_Columns {
 	public function add_columns( $columns ) {
 		$columns['shivora_login_insights'] = __(
 			'Last Login',
-			'shivora-login-insight'
+			'shivora-login-insights'
 		);
 		$settings = SLI_Helper::get_settings();
 		if ( ! empty( $settings['track_ip'] ) ) {
 			$columns['sli_last_login_ip'] = __(
 				'Login IP',
-				'shivora-login-insight'
+				'shivora-login-insights'
 			);
 		}
 		return $columns;

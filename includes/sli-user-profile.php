@@ -74,14 +74,14 @@ class SLI_User_Profile {
 		} ?>
 
 		<h2>
-			<?php esc_html_e('Last Login Information', 'shivora-login-insight'); ?>
+			<?php esc_html_e('Last Login Information', 'shivora-login-insights'); ?>
 		</h2>
 
 		<table class="form-table" role="presentation">
 			<tr>
 				<th>
 					<label>
-						<?php esc_html_e('Last Login', 'shivora-login-insight' ); ?>
+						<?php esc_html_e('Last Login', 'shivora-login-insights' ); ?>
 					</label>
 				</th>
 				<td>
@@ -97,7 +97,7 @@ class SLI_User_Profile {
 				<tr>
 					<th>
 						<label>
-							<?php esc_html_e('Last Login IP', 'shivora-login-insight'); ?>
+							<?php esc_html_e('Last Login IP', 'shivora-login-insights'); ?>
 						</label>
 					</th>
 					<td>
@@ -109,14 +109,14 @@ class SLI_User_Profile {
 			<tr>
 				<th>
 					<label>
-						<?php esc_html_e('Days Since Last Login', 'shivora-login-insight'); ?>
+						<?php esc_html_e('Days Since Last Login', 'shivora-login-insights'); ?>
 					</label>
 				</th>
 				<td>
 					<?php if ( '' === $days_since_login ) {
 						esc_html_e(
 							'Never Logged In',
-							'shivora-login-insight'
+							'shivora-login-insights'
 						);
 					} else {
 						echo esc_html(

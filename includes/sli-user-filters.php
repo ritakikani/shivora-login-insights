@@ -64,23 +64,23 @@ class SLI_User_Filters {
 
 		<select name="sli_inactive">
 			<option value="">
-				<?php esc_html_e('All Users', 'shivora-login-insight'); ?>
+				<?php esc_html_e('All Users', 'shivora-login-insights'); ?>
 			</option>
 
 			<option	value="30" <?php selected( $current_filter, '30' ); ?>>
-				<?php esc_html_e('Inactive 30 Days',	'shivora-login-insight'); ?>
+				<?php esc_html_e('Inactive 30 Days',	'shivora-login-insights'); ?>
 			</option>
 
 			<option	value="60" <?php selected( $current_filter, '60' ); ?>>
-				<?php esc_html_e('Inactive 60 Days',	'shivora-login-insight'); ?>
+				<?php esc_html_e('Inactive 60 Days',	'shivora-login-insights'); ?>
 			</option>
 
 			<option	value="90" <?php selected( $current_filter, '90' ); ?>>
-				<?php esc_html_e('Inactive 90 Days',	'shivora-login-insight'); ?>
+				<?php esc_html_e('Inactive 90 Days',	'shivora-login-insights'); ?>
 			</option>
 
 			<option	value="never" <?php selected( $current_filter, 'never' ); ?>>
-				<?php esc_html_e('Never Logged In', 'shivora-login-insight'); ?>
+				<?php esc_html_e('Never Logged In', 'shivora-login-insights'); ?>
 			</option>
 		</select>
 		<?php
