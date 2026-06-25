@@ -1,11 +1,4 @@
 <?php
-/**
- * Plugin Activator.
- *
- * @package Shivora_Login_Insights
- * @since   1.0.0
- */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -34,10 +27,9 @@ class SLI_Activator {
 		 * Create default plugin settings
 		 * only if they don't already exist.
 		 */
-		if ( false === get_option( 'wpll_settings' ) ) {
-
+		if ( false === get_option( 'sli_settings' ) ) {
 			add_option(
-				'wpll_settings',
+				'sli_settings',
 				array(
 					'track_ip'         => 1,
 					'dashboard_widget' => 1,
@@ -52,7 +44,7 @@ class SLI_Activator {
 		 * Useful for future upgrade routines.
 		 */
 		update_option(
-			'wpll_version',
+			'sli_version',
 			SLI_VERSION
 		);
 
@@ -62,7 +54,7 @@ class SLI_Activator {
 		 * Allows future modules or add-ons
 		 * to perform their own activation tasks.
 		 */
-		do_action( 'wpll_activate' );
+		do_action( 'sli_activate' );
 
 		/**
 		 * Flush rewrite rules.

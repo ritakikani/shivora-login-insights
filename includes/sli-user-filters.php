@@ -1,11 +1,4 @@
 <?php
-/**
- * User Filters.
- *
- * @package Shivora_Login_Insights
- * @since   1.0.0
- */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -27,7 +20,6 @@ class SLI_User_Filters {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-
 		$this->hooks();
 	}
 
@@ -39,12 +31,10 @@ class SLI_User_Filters {
 	 * @return void
 	 */
 	private function hooks() {
-
 		add_action(
 			'restrict_manage_users',
 			array( $this, 'add_filters' )
 		);
-
 		add_action(
 			'pre_get_users',
 			array( $this, 'filter_users' )
@@ -68,63 +58,31 @@ class SLI_User_Filters {
 			return;
 		}
 
-		$current_filter = isset( $_GET['wpll_inactive'] )
-			? sanitize_text_field( wp_unslash( $_GET['wpll_inactive'] ) )
-			: '';
+		$current_filter = isset( $_GET['sli_inactive'] )
+			? sanitize_text_field( wp_unslash( $_GET['sli_inactive'] ) )
+			: ''; ?>
 
-		?>
-
-		<select name="wpll_inactive">
-
+		<select name="sli_inactive">
 			<option value="">
-				<?php esc_html_e(
-					'All Users',
-					'last-login-tracker'
-				); ?>
+				<?php esc_html_e('All Users', 'shivora-login-insight'); ?>
 			</option>
 
-			<option
-				value="30"
-				<?php selected( $current_filter, '30' ); ?>
-			>
-				<?php esc_html_e(
-					'Inactive 30 Days',
-					'last-login-tracker'
-				); ?>
+			<option	value="30" <?php selected( $current_filter, '30' ); ?>>
+				<?php esc_html_e('Inactive 30 Days',	'shivora-login-insight'); ?>
 			</option>
 
-			<option
-				value="60"
-				<?php selected( $current_filter, '60' ); ?>
-			>
-				<?php esc_html_e(
-					'Inactive 60 Days',
-					'last-login-tracker'
-				); ?>
+			<option	value="60" <?php selected( $current_filter, '60' ); ?>>
+				<?php esc_html_e('Inactive 60 Days',	'shivora-login-insight'); ?>
 			</option>
 
-			<option
-				value="90"
-				<?php selected( $current_filter, '90' ); ?>
-			>
-				<?php esc_html_e(
-					'Inactive 90 Days',
-					'last-login-tracker'
-				); ?>
+			<option	value="90" <?php selected( $current_filter, '90' ); ?>>
+				<?php esc_html_e('Inactive 90 Days',	'shivora-login-insight'); ?>
 			</option>
 
-			<option
-				value="never"
-				<?php selected( $current_filter, 'never' ); ?>
-			>
-				<?php esc_html_e(
-					'Never Logged In',
-					'last-login-tracker'
-				); ?>
+			<option	value="never" <?php selected( $current_filter, 'never' ); ?>>
+				<?php esc_html_e('Never Logged In', 'shivora-login-insight'); ?>
 			</option>
-
 		</select>
-
 		<?php
 	}
 
@@ -151,13 +109,13 @@ class SLI_User_Filters {
 			return;
 		}
 
-		if ( empty( $_GET['wpll_inactive'] ) ) {
+		if ( empty( $_GET['sli_inactive'] ) ) {
 			return;
 		}
 
 		$inactive_days = sanitize_text_field(
 			wp_unslash(
-				$_GET['wpll_inactive']
+				$_GET['sli_inactive']
 			)
 		);
 
@@ -165,17 +123,15 @@ class SLI_User_Filters {
 		 * Show users who never logged in.
 		 */
 		if ( 'never' === $inactive_days ) {
-
 			$query->set(
 				'meta_query',
 				array(
 					array(
-						'key'     => 'wpll_last_login',
+						'key'     => 'shivora_login_insights',
 						'compare' => 'NOT EXISTS',
 					),
 				)
 			);
-
 			return;
 		}
 
@@ -199,7 +155,7 @@ class SLI_User_Filters {
 
 		$query->set(
 			'meta_key',
-			'wpll_last_login'
+			'shivora_login_insights'
 		);
 
 		$query->set(

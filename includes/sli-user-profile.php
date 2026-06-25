@@ -1,11 +1,4 @@
 <?php
-/**
- * User Profile.
- *
- * @package Shivora_Login_Insights
- * @since   1.0.0
- */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -26,7 +19,6 @@ class SLI_User_Profile {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-
 		$this->hooks();
 	}
 
@@ -79,104 +71,61 @@ class SLI_User_Profile {
 			$days_since_login = floor(
 				( current_time( 'timestamp' ) - $last_login ) / DAY_IN_SECONDS
 			);
-		}
-
-		?>
+		} ?>
 
 		<h2>
-			<?php esc_html_e(
-				'Last Login Information',
-				'last-login-tracker'
-			); ?>
+			<?php esc_html_e('Last Login Information', 'shivora-login-insight'); ?>
 		</h2>
 
 		<table class="form-table" role="presentation">
-
 			<tr>
-
 				<th>
 					<label>
-						<?php esc_html_e(
-							'Last Login',
-							'last-login-tracker'
-						); ?>
+						<?php esc_html_e('Last Login', 'shivora-login-insight' ); ?>
 					</label>
 				</th>
-
 				<td>
-
-					<?php
-					echo esc_html(
+					<?php echo esc_html(
 						SLI_Helper::format_login_date(
 							$last_login
 						)
-					);
-					?>
-
+					);?>
 				</td>
-
 			</tr>
 
 			<?php if ( ! empty( $last_login_ip ) ) : ?>
-
 				<tr>
-
 					<th>
 						<label>
-							<?php esc_html_e(
-								'Last Login IP',
-								'last-login-tracker'
-							); ?>
+							<?php esc_html_e('Last Login IP', 'shivora-login-insight'); ?>
 						</label>
 					</th>
-
 					<td>
-
 						<?php echo esc_html( $last_login_ip ); ?>
-
 					</td>
-
 				</tr>
-
 			<?php endif; ?>
 
 			<tr>
-
 				<th>
 					<label>
-						<?php esc_html_e(
-							'Days Since Last Login',
-							'last-login-tracker'
-						); ?>
+						<?php esc_html_e('Days Since Last Login', 'shivora-login-insight'); ?>
 					</label>
 				</th>
-
 				<td>
-
-					<?php
-
-					if ( '' === $days_since_login ) {
-
+					<?php if ( '' === $days_since_login ) {
 						esc_html_e(
 							'Never Logged In',
-							'last-login-tracker'
+							'shivora-login-insight'
 						);
-
 					} else {
-
 						echo esc_html(
 							$days_since_login
 						);
-					}
-
-					?>
-
+					} ?>
 				</td>
-
 			</tr>
-
 		</table>
-
 		<?php
 	}
 }

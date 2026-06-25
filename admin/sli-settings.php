@@ -1,11 +1,4 @@
 <?php
-/**
- * Settings.
- *
- * @package Shivora_Login_Insights
- * @since   1.0.0
- */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -28,7 +21,6 @@ class SLI_Settings {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-
 		$this->hooks();
 	}
 
@@ -40,7 +32,6 @@ class SLI_Settings {
 	 * @return void
 	 */
 	private function hooks() {
-
 		add_action(
 			'admin_init',
 			array(
@@ -48,7 +39,6 @@ class SLI_Settings {
 				'register_settings',
 			)
 		);
-
 		add_action(
 			'admin_menu',
 			array(
@@ -67,11 +57,10 @@ class SLI_Settings {
 	 * @return void
 	 */
 	public function register_submenu() {
-
 		add_submenu_page(
 			'sli-overview',
-			__( 'Settings', 'last-login-tracker' ),
-			__( 'Settings', 'last-login-tracker' ),
+			__( 'Settings', 'shivora-login-insight' ),
+			__( 'Settings', 'shivora-login-insight' ),
 			'manage_options',
 			'sli-settings',
 			array(
@@ -89,10 +78,9 @@ class SLI_Settings {
 	 * @return void
 	 */
 	public function register_settings() {
-
 		register_setting(
-			'wpll_settings_group',
-			'wpll_settings',
+			'sli_settings_group',
+			'sli_settings',
 			array(
 				'sanitize_callback' => array(
 					$this,
@@ -112,16 +100,9 @@ class SLI_Settings {
 	 * @return array
 	 */
 	public function sanitize_settings( $input ) {
-
 		$sanitized = array();
-
-		$sanitized['track_ip'] = ! empty(
-			$input['track_ip']
-		) ? 1 : 0;
-
-		$sanitized['dashboard_widget'] = ! empty(
-			$input['dashboard_widget']
-		) ? 1 : 0;
+		$sanitized['track_ip'] = ! empty($input['track_ip']	) ? 1 : 0;
+		$sanitized['dashboard_widget'] = ! empty($input['dashboard_widget']) ? 1 : 0;
 
 		$allowed_retention = array(
 			'30',
@@ -130,13 +111,7 @@ class SLI_Settings {
 			'forever',
 		);
 
-		$sanitized['retention'] = isset(
-			$input['retention']
-		) && in_array(
-			$input['retention'],
-			$allowed_retention,
-			true
-		)
+		$sanitized['retention'] = isset($input['retention']	) && in_array($input['retention'], $allowed_retention, true)
 			? $input['retention']
 			: 'forever';
 
@@ -151,152 +126,65 @@ class SLI_Settings {
 	 * @return void
 	 */
 	public function render_page() {
-
-		$settings = SLI_Helper::get_settings();
-
-		?>
-
+		$settings = SLI_Helper::get_settings(); ?>
 		<div class="wrap">
-
 			<h1>
-				<?php esc_html_e(
-					'Last Login Tracker Settings',
-					'last-login-tracker'
-				); ?>
+				<?php esc_html_e( 'Last Login Tracker Settings', 'shivora-login-insight'); ?>
 			</h1>
 
-			<form
-				method="post"
-				action="options.php"
-			>
-
-				<?php
-				settings_fields(
-					'wpll_settings_group'
-				);
-				?>
-
+			<form method="post" action="options.php" >
+				<?php settings_fields( 'sli_settings_group' ); ?>
 				<table class="form-table">
-
 					<tr>
-
 						<th scope="row">
-
-							<?php esc_html_e(
-								'Track Login IP',
-								'last-login-tracker'
-							); ?>
-
+							<?php esc_html_e( 'Track Login IP', 'shivora-login-insight' ); ?>
 						</th>
-
 						<td>
-
 							<label>
-
-								<input
-									type="checkbox"
-									name="wpll_settings[track_ip]"
-									value="1"
-									<?php checked(
-										$settings['track_ip'],
-										1
-									); ?>
-								/>
-
-								<?php esc_html_e(
-									'Store user login IP address.',
-									'last-login-tracker'
-								); ?>
-
+								<input type="checkbox" name="sli_settings[track_ip]" value="1" <?php checked($settings['track_ip'], 1); ?> />
+								<?php esc_html_e('Store user login IP address.',	'shivora-login-insight'); ?>
 							</label>
-
 						</td>
-
 					</tr>
 
 					<tr>
-
 						<th scope="row">
-
-							<?php esc_html_e(
-								'Dashboard Widget',
-								'last-login-tracker'
-							); ?>
-
+							<?php esc_html_e( 'Dashboard Widget',	'shivora-login-insight' ); ?>
 						</th>
-
 						<td>
-
 							<label>
-
-								<input
-									type="checkbox"
-									name="wpll_settings[dashboard_widget]"
-									value="1"
-									<?php checked(
-										$settings['dashboard_widget'],
-										1
-									); ?>
-								/>
-
-								<?php esc_html_e(
-									'Show dashboard widget.',
-									'last-login-tracker'
-								); ?>
-
+								<input type="checkbox" name="sli_settings[dashboard_widget]" value="1" <?php checked($settings['dashboard_widget'], 1); ?> />
+								<?php esc_html_e('Show dashboard widget.', 'shivora-login-insight' ); ?>
 							</label>
-
 						</td>
-
 					</tr>
 
 					<tr>
-
 						<th scope="row">
-
-							<?php esc_html_e(
-								'Retention Period',
-								'last-login-tracker'
-							); ?>
-
+							<?php esc_html_e('Retention Period',	'shivora-login-insight'); ?>
 						</th>
 
 						<td>
-
-							<select
-								name="wpll_settings[retention]"
-							>
-
+							<select	name="sli_settings[retention]">
 								<option value="30" <?php selected( $settings['retention'], '30' ); ?>>
-									30 Days
+								    <?php esc_html_e('30 Days',	'shivora-login-insight'); ?>
 								</option>
-
 								<option value="60" <?php selected( $settings['retention'], '60' ); ?>>
-									60 Days
+									<?php esc_html_e('60 Days',	'shivora-login-insight'); ?>
 								</option>
-
 								<option value="90" <?php selected( $settings['retention'], '90' ); ?>>
-									90 Days
+									<?php esc_html_e('90 Days',	'shivora-login-insight'); ?>
 								</option>
-
 								<option value="forever" <?php selected( $settings['retention'], 'forever' ); ?>>
-									Forever
+									<?php esc_html_e('Forever',	'shivora-login-insight'); ?>
 								</option>
-
 							</select>
-
 						</td>
-
 					</tr>
-
 				</table>
-
 				<?php submit_button(); ?>
-
 			</form>
-
 		</div>
-
 		<?php
 	}
 }

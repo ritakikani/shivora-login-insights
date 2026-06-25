@@ -1,11 +1,4 @@
 <?php
-/**
- * Export.
- *
- * @package Shivora_Login_Insights
- * @since   1.0.0
- */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -28,7 +21,6 @@ class SLI_Export {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-
 		$this->hooks();
 	}
 
@@ -40,7 +32,6 @@ class SLI_Export {
 	 * @return void
 	 */
 	private function hooks() {
-
 		add_action(
 			'admin_menu',
 			array(
@@ -49,7 +40,6 @@ class SLI_Export {
 			),
 			30
 		);
-
 		add_action(
 			'admin_init',
 			array(
@@ -67,11 +57,10 @@ class SLI_Export {
 	 * @return void
 	 */
 	public function register_submenu() {
-
 		add_submenu_page(
 			'sli-overview',
-			__( 'Export', 'last-login-tracker' ),
-			__( 'Export', 'last-login-tracker' ),
+			__( 'Export', 'shivora-login-insight' ),
+			__( 'Export', 'shivora-login-insight' ),
 			'list_users',
 			'sli-export',
 			array(
@@ -88,49 +77,23 @@ class SLI_Export {
 	 *
 	 * @return void
 	 */
-	public function render_page() {
-
-		?>
-
+	public function render_page() { ?>
 		<div class="wrap">
-
 			<h1>
-				<?php esc_html_e(
-					'Export Login Activity',
-					'last-login-tracker'
-				); ?>
+				<?php esc_html_e('Export Login Activity', 'shivora-login-insight'); ?>
 			</h1>
 
 			<p>
-				<?php esc_html_e(
-					'Export all tracked login activity as a CSV file.',
-					'last-login-tracker'
-				); ?>
+				<?php esc_html_e('Export all tracked login activity as a CSV file.', 'shivora-login-insight'); ?>
 			</p>
 
 			<form method="post">
-
-				<?php
-				wp_nonce_field(
-					'wpll_export_users',
-					'wpll_export_nonce'
-				);
-				?>
-
-				<input
-					type="hidden"
-					name="wpll_action"
-					value="export_users"
-				/>
-
-				<?php submit_button(
-					__( 'Export CSV', 'last-login-tracker' )
-				); ?>
-
+				<?php wp_nonce_field('sli_export_users', 'sli_export_nonce');?>
+				<input type="hidden" name="sli_action" value="export_users" />
+				<?php submit_button(__( 'Export CSV', 'shivora-login-insight' )); ?>
 			</form>
 
 		</div>
-
 		<?php
 	}
 
@@ -143,11 +106,11 @@ class SLI_Export {
 	 */
 	public function handle_export() {
 
-		if ( empty( $_POST['wpll_action'] ) ) {
+		if ( empty( $_POST['sli_action'] ) ) {
 			return;
 		}
 
-		if ( 'export_users' !== $_POST['wpll_action'] ) {
+		if ( 'export_users' !== $_POST['sli_action'] ) {
 			return;
 		}
 
@@ -156,8 +119,8 @@ class SLI_Export {
 		}
 
 		check_admin_referer(
-			'wpll_export_users',
-			'wpll_export_nonce'
+			'sli_export_users',
+			'sli_export_nonce'
 		);
 
 		$this->export_csv();
@@ -180,7 +143,6 @@ class SLI_Export {
 		);
 
 		nocache_headers();
-
 		header( 'Content-Type: text/csv; charset=utf-8' );
 		header( 'Content-Disposition: attachment; filename=' . $filename );
 
@@ -221,9 +183,7 @@ class SLI_Export {
 				)
 			);
 		}
-
 		fclose( $output );
-
 		exit;
 	}
 }

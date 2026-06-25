@@ -1,11 +1,4 @@
 <?php
-/**
- * User Columns.
- *
- * @package Shivora_Login_Insights
- * @since   1.0.0
- */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -29,7 +22,6 @@ class SLI_User_Columns {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-
 		$this->hooks();
 	}
 
@@ -41,24 +33,20 @@ class SLI_User_Columns {
 	 * @return void
 	 */
 	private function hooks() {
-
 		add_filter(
 			'manage_users_columns',
 			array( $this, 'add_columns' )
 		);
-
 		add_filter(
 			'manage_users_custom_column',
 			array( $this, 'render_columns' ),
 			10,
 			3
 		);
-
 		add_filter(
 			'manage_users_sortable_columns',
 			array( $this, 'sortable_columns' )
 		);
-
 		add_action(
 			'pre_get_users',
 			array( $this, 'sort_users' )
@@ -75,22 +63,17 @@ class SLI_User_Columns {
 	 * @return array
 	 */
 	public function add_columns( $columns ) {
-
-		$columns['wpll_last_login'] = __(
+		$columns['shivora_login_insights'] = __(
 			'Last Login',
-			'last-login-tracker'
+			'shivora-login-insight'
 		);
-
 		$settings = SLI_Helper::get_settings();
-
 		if ( ! empty( $settings['track_ip'] ) ) {
-
-			$columns['wpll_last_login_ip'] = __(
+			$columns['sli_last_login_ip'] = __(
 				'Login IP',
-				'last-login-tracker'
+				'shivora-login-insight'
 			);
 		}
-
 		return $columns;
 	}
 
@@ -105,37 +88,25 @@ class SLI_User_Columns {
 	 *
 	 * @return string
 	 */
-	public function render_columns(
-		$value,
-		$column_name,
-		$user_id
-	) {
-
+	public function render_columns($value,	$column_name, $user_id) {
 		switch ( $column_name ) {
-
-			case 'wpll_last_login':
-
+			case 'shivora_login_insights':
 				$timestamp = SLI_Helper::get_last_login(
 					$user_id
 				);
-
 				return esc_html(
 					SLI_Helper::format_login_date(
 						$timestamp
 					)
 				);
-
-			case 'wpll_last_login_ip':
-
+			case 'sli_last_login_ip':
 				$ip = SLI_Helper::get_last_login_ip(
 					$user_id
 				);
-
 				return ! empty( $ip )
 					? esc_html( $ip )
 					: '&mdash;';
 		}
-
 		return $value;
 	}
 
@@ -149,9 +120,7 @@ class SLI_User_Columns {
 	 * @return array
 	 */
 	public function sortable_columns( $columns ) {
-
-		$columns['wpll_last_login'] = 'wpll_last_login';
-
+		$columns['shivora_login_insights'] = 'shivora_login_insights';
 		return $columns;
 	}
 
@@ -168,28 +137,21 @@ class SLI_User_Columns {
 	 * @return void
 	 */
 	public function sort_users( $query ) {
-
 		global $pagenow;
-
 		if ( ! is_admin() ) {
 			return;
 		}
-
 		if ( 'users.php' !== $pagenow ) {
 			return;
 		}
-
 		$order_by = $query->get( 'orderby' );
-
-		if ( 'wpll_last_login' !== $order_by ) {
+		if ( 'shivora_login_insights' !== $order_by ) {
 			return;
 		}
-
 		$query->set(
 			'meta_key',
-			'wpll_last_login'
+			'shivora_login_insights'
 		);
-
 		$query->set(
 			'orderby',
 			'meta_value_num'

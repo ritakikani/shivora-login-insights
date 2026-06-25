@@ -1,11 +1,4 @@
 <?php
-/**
- * REST Controller.
- *
- * @package Shivora_Login_Insights
- * @since   1.0.0
- */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -21,14 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0.0
  */
 class SLI_REST_Controller {
-
 	/**
 	 * Constructor.
 	 *
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-
 		$this->hooks();
 	}
 
@@ -40,7 +31,6 @@ class SLI_REST_Controller {
 	 * @return void
 	 */
 	private function hooks() {
-
 		add_action(
 			'rest_api_init',
 			array( $this, 'register_routes' )
@@ -55,9 +45,8 @@ class SLI_REST_Controller {
 	 * @return void
 	 */
 	public function register_routes() {
-
 		register_rest_route(
-			'wpll/v1',
+			'sli/v1',
 			'/user/(?P<id>\d+)',
 			array(
 				'methods'             => WP_REST_Server::READABLE,
@@ -71,9 +60,8 @@ class SLI_REST_Controller {
 				),
 			)
 		);
-
 		register_rest_route(
-			'wpll/v1',
+			'sli/v1',
 			'/inactive-users',
 			array(
 				'methods'             => WP_REST_Server::READABLE,
@@ -101,7 +89,6 @@ class SLI_REST_Controller {
 	 * @return bool
 	 */
 	public function permissions_check() {
-
 		return current_user_can(
 			'list_users'
 		);
@@ -111,7 +98,7 @@ class SLI_REST_Controller {
 	 * Get user activity.
 	 *
 	 * Endpoint:
-	 * /wp-json/wpll/v1/user/{id}
+	 * /wp-json/sli/v1/user/{id}
 	 *
 	 * @since 1.0.0
 	 *
@@ -120,29 +107,24 @@ class SLI_REST_Controller {
 	 * @return WP_REST_Response|WP_Error
 	 */
 	public function get_user_activity( $request ) {
-
 		$user_id = absint(
 			$request['id']
 		);
-
 		$user = get_userdata(
 			$user_id
 		);
-
 		if ( ! $user ) {
-
 			return new WP_Error(
-				'wpll_user_not_found',
+				'sli_user_not_found',
 				__(
 					'User not found.',
-					'last-login-tracker'
+					'shivora-login-insight'
 				),
 				array(
 					'status' => 404,
 				)
 			);
 		}
-
 		$data = array(
 			'id'            => $user->ID,
 			'username'      => $user->user_login,
@@ -155,7 +137,6 @@ class SLI_REST_Controller {
 				$user->ID
 			),
 		);
-
 		return rest_ensure_response(
 			$data
 		);
@@ -165,7 +146,7 @@ class SLI_REST_Controller {
 	 * Get inactive users.
 	 *
 	 * Endpoint:
-	 * /wp-json/wpll/v1/inactive-users?days=30
+	* /wp-json/sli/v1/inactive-users?days=30
 	 *
 	 * @since 1.0.0
 	 *
@@ -174,36 +155,29 @@ class SLI_REST_Controller {
 	 * @return WP_REST_Response
 	 */
 	public function get_inactive_users( $request ) {
-
 		$days = absint(
 			$request->get_param(
 				'days'
 			)
 		);
-
 		if ( empty( $days ) ) {
 			$days = 30;
 		}
-
 		$timestamp = strtotime(
 			sprintf(
 				'-%d days',
 				$days
 			)
 		);
-
 		$users = get_users(
 			array(
-				'meta_key'     => 'wpll_last_login',
+				'meta_key'     => 'shivora_login_insights',
 				'meta_value'   => $timestamp,
 				'meta_compare' => '<',
 			)
 		);
-
 		$response = array();
-
 		foreach ( $users as $user ) {
-
 			$response[] = array(
 				'id'           => $user->ID,
 				'username'     => $user->user_login,
@@ -214,7 +188,6 @@ class SLI_REST_Controller {
 				),
 			);
 		}
-
 		return rest_ensure_response(
 			$response
 		);

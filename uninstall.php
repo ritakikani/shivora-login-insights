@@ -1,11 +1,10 @@
 <?php
-
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
 delete_option(
-	'wpll_settings'
+	'sli_settings'
 );
 
 $users = get_users(
@@ -15,14 +14,12 @@ $users = get_users(
 );
 
 foreach ( $users as $user_id ) {
-
 	delete_user_meta(
 		$user_id,
-		'wpll_last_login'
+		'shivora_login_insights'
 	);
-
 	delete_user_meta(
 		$user_id,
-		'wpll_last_login_ip'
+		'sli_last_login_ip'
 	);
 }

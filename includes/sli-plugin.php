@@ -1,3 +1,13 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+/**
+ * Main plugin class.
+ *
+ * @since 1.0.0
+ */
 class SLI_Plugin {
 
 	public $login_tracker;
@@ -78,7 +88,7 @@ class SLI_Plugin {
 	public function load_textdomain() {
 
 		load_plugin_textdomain(
-			'last-login-tracker',
+			'shivora-login-insight',
 			false,
 			dirname( plugin_basename( SLI_PLUGIN_FILE ) ) . '/languages'
 		);

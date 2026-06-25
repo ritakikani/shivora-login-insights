@@ -1,17 +1,10 @@
 <?php
-/**
- * Login Tracker.
- *
- * @package Shivora_Login_Insights
- * @since   1.0.0
- */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 /**
- * Login tracker class.
+ * Login tracker class used to track user login.
  *
  * Responsible for:
  * - Tracking user login time.
@@ -28,7 +21,6 @@ class SLI_Login_Tracker {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-
 		$this->hooks();
 	}
 
@@ -43,7 +35,6 @@ class SLI_Login_Tracker {
 	 * @return void
 	 */
 	private function hooks() {
-
 		add_action(
 			'wp_login',
 			array( $this, 'track_login' ),
@@ -77,7 +68,7 @@ class SLI_Login_Tracker {
 		 */
 		update_user_meta(
 			$user->ID,
-			'wpll_last_login',
+			'shivora_login_insights',
 			current_time( 'timestamp' )
 		);
 
@@ -96,7 +87,7 @@ class SLI_Login_Tracker {
 		 */
 		update_user_meta(
 			$user->ID,
-			'wpll_last_login_ip',
+			'sli_last_login_ip',
 			SLI_Helper::get_user_ip()
 		);
 
@@ -105,7 +96,7 @@ class SLI_Login_Tracker {
 		 * successful login tracking.
 		 */
 		do_action(
-			'wpll_after_track_login',
+			'sli_after_track_login',
 			$user->ID,
 			$user
 		);

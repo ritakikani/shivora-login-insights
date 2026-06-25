@@ -236,7 +236,7 @@ class SLI_Plugin {
 	public function load_textdomain() {
 
 		load_plugin_textdomain(
-			'last-login-tracker',
+			'shivora-login-insight',
 			false,
 			dirname(
 				plugin_basename(
@@ -254,7 +254,7 @@ class SLI_Plugin {
  *
  * @return SLI_Plugin
  */
-function WPLL() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+function SLI() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 
 	return SLI_Plugin::instance();
 }
@@ -262,4 +262,4 @@ function WPLL() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.
 /**
  * Global plugin object.
  */
-$GLOBALS['wpll'] = WPLL();
+$GLOBALS['sli'] = SLI();

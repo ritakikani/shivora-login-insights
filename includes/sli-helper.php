@@ -1,11 +1,4 @@
 <?php
-/**
- * Helper Functions.
- *
- * @package Shivora_Login_Insights
- * @since   1.0.0
- */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -30,18 +23,15 @@ class SLI_Helper {
 	 * @return array
 	 */
 	public static function get_settings() {
-
 		$defaults = array(
 			'track_ip'         => 1,
 			'dashboard_widget' => 1,
 			'retention'        => 'forever',
 		);
-
 		$settings = get_option(
-			'wpll_settings',
+			'sli_settings',
 			array()
 		);
-
 		return wp_parse_args(
 			$settings,
 			$defaults
@@ -58,10 +48,9 @@ class SLI_Helper {
 	 * @return int
 	 */
 	public static function get_last_login( $user_id ) {
-
 		return (int) get_user_meta(
 			$user_id,
-			'wpll_last_login',
+			'shivora_login_insights',
 			true
 		);
 	}
@@ -76,10 +65,9 @@ class SLI_Helper {
 	 * @return string
 	 */
 	public static function get_last_login_ip( $user_id ) {
-
 		return (string) get_user_meta(
 			$user_id,
-			'wpll_last_login_ip',
+			'sli_last_login_ip',
 			true
 		);
 	}
@@ -96,11 +84,9 @@ class SLI_Helper {
 	 * @return string
 	 */
 	public static function format_login_date( $timestamp ) {
-
 		if ( empty( $timestamp ) ) {
-			return __( 'Never', 'last-login-tracker' );
+			return __( 'Never', 'shivora-login-insight' );
 		}
-
 		return wp_date(
 			get_option( 'date_format' ) . ' ' . get_option( 'time_format' ),
 			$timestamp
@@ -115,21 +101,18 @@ class SLI_Helper {
 	 * @return int
 	 */
 	public static function get_logged_in_today_count() {
-
 		$today_start = strtotime(
 			'today',
 			current_time( 'timestamp' )
 		);
-
 		$users = get_users(
 			array(
-				'meta_key'     => 'wpll_last_login',
+				'meta_key'     => 'shivora_login_insights',
 				'meta_value'   => $today_start,
 				'meta_compare' => '>=',
 				'fields'       => 'ID',
 			)
 		);
-
 		return count( $users );
 	}
 
@@ -141,19 +124,17 @@ class SLI_Helper {
 	 * @return int
 	 */
 	public static function get_never_logged_in_count() {
-
 		$users = get_users(
 			array(
 				'meta_query' => array(
 					array(
-						'key'     => 'wpll_last_login',
+						'key'     => 'shivora_login_insights',
 						'compare' => 'NOT EXISTS',
 					),
 				),
 				'fields' => 'ID',
 			)
 		);
-
 		return count( $users );
 	}
 
@@ -167,23 +148,20 @@ class SLI_Helper {
 	 * @return int
 	 */
 	public static function get_inactive_users_count( $days = 30 ) {
-
 		$timestamp = strtotime(
 			sprintf(
 				'-%d days',
 				absint( $days )
 			)
 		);
-
 		$users = get_users(
 			array(
-				'meta_key'     => 'wpll_last_login',
+				'meta_key'     => 'shivora_login_insights',
 				'meta_value'   => $timestamp,
 				'meta_compare' => '<',
 				'fields'       => 'ID',
 			)
 		);
-
 		return count( $users );
 	}
 
@@ -197,7 +175,6 @@ class SLI_Helper {
 	 * @return string
 	 */
 	public static function get_user_ip() {
-
 		$ip_headers = array(
 			'HTTP_CF_CONNECTING_IP',
 			'HTTP_X_FORWARDED_FOR',
@@ -206,11 +183,9 @@ class SLI_Helper {
 		);
 
 		foreach ( $ip_headers as $header ) {
-
 			if ( empty( $_SERVER[ $header ] ) ) {
 				continue;
 			}
-
 			$ip = explode(
 				',',
 				sanitize_text_field(
@@ -219,10 +194,8 @@ class SLI_Helper {
 					)
 				)
 			);
-
 			return trim( $ip[0] );
 		}
-
 		return '';
 	}
 }
