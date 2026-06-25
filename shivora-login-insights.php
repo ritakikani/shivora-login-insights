@@ -1,12 +1,12 @@
 <?php
 /**
- * Plugin Name: Last Login Tracker
- * Plugin URI: https://wordpress.org/plugins/last-login-tracker/
+ * Plugin Name: Shivora Login Insights
+ * Plugin URI: https://wordpress.org/plugins/shivora-login-insights/
  * Description: Track user last login date, login IP address, inactive users and activity reports.
  * Version: 1.0.0
  * Author: Rita Kikani
  * License: GPL v2 or later
- * Text Domain: last-login-tracker
+ * Text Domain: shivora-login-insights
  * Domain Path: /languages
  */
 
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class WPLL_Plugin {
+class SLI_Plugin {
 
 	/**
 	 * Plugin instance.
@@ -37,42 +37,42 @@ class WPLL_Plugin {
 	/**
 	 * Login tracker module.
 	 *
-	 * @var WPLL_Login_Tracker
+	 * @var SLI_Login_Tracker
 	 */
 	public $login_tracker;
 
 	/**
 	 * User columns module.
 	 *
-	 * @var WPLL_User_Columns
+	 * @var SLI_User_Columns
 	 */
 	public $user_columns;
 
 	/**
 	 * User profile module.
 	 *
-	 * @var WPLL_User_Profile
+	 * @var SLI_User_Profile
 	 */
 	public $user_profile;
 
 	/**
 	 * User filters module.
 	 *
-	 * @var WPLL_User_Filters
+	 * @var SLI_User_Filters
 	 */
 	public $user_filters;
 
 	/**
 	 * REST controller module.
 	 *
-	 * @var WPLL_REST_Controller
+	 * @var SLI_REST_Controller
 	 */
 	public $rest_controller;
 
 	/**
 	 * Admin module.
 	 *
-	 * @var WPLL_Admin
+	 * @var SLI_Admin
 	 */
 	public $admin;
 
@@ -141,26 +141,26 @@ class WPLL_Plugin {
 	 */
 	private function define_constants() {
 
-		if ( ! defined( 'WPLL_VERSION' ) ) {
-			define( 'WPLL_VERSION', '1.0.0' );
+		if ( ! defined( 'SLI_VERSION' ) ) {
+			define( 'SLI_VERSION', '1.0.0' );
 		}
 
-		if ( ! defined( 'WPLL_PLUGIN_FILE' ) ) {
-			define( 'WPLL_PLUGIN_FILE', __FILE__ );
+		if ( ! defined( 'SLI_PLUGIN_FILE' ) ) {
+			define( 'SLI_PLUGIN_FILE', __FILE__ );
 		}
 
-		if ( ! defined( 'WPLL_PLUGIN_DIR' ) ) {
+		if ( ! defined( 'SLI_PLUGIN_DIR' ) ) {
 			define(
-				'WPLL_PLUGIN_DIR',
+				'SLI_PLUGIN_DIR',
 				untrailingslashit(
 					plugin_dir_path( __FILE__ )
 				)
 			);
 		}
 
-		if ( ! defined( 'WPLL_PLUGIN_URL' ) ) {
+		if ( ! defined( 'SLI_PLUGIN_URL' ) ) {
 			define(
-				'WPLL_PLUGIN_URL',
+				'SLI_PLUGIN_URL',
 				untrailingslashit(
 					plugin_dir_url( __FILE__ )
 				)
@@ -180,16 +180,16 @@ class WPLL_Plugin {
 	 */
 	private function includes() {
 
-		require_once WPLL_PLUGIN_DIR . '/includes/wpll-activator.php';
-		require_once WPLL_PLUGIN_DIR . '/includes/wpll-helper.php';
-		require_once WPLL_PLUGIN_DIR . '/includes/wpll-login-tracker.php';
-		require_once WPLL_PLUGIN_DIR . '/includes/wpll-user-columns.php';
-		require_once WPLL_PLUGIN_DIR . '/includes/wpll-user-profile.php';
-		require_once WPLL_PLUGIN_DIR . '/includes/wpll-user-filters.php';
-		require_once WPLL_PLUGIN_DIR . '/includes/wpll-rest-controller.php';
+		require_once SLI_PLUGIN_DIR . '/includes/sli-activator.php';
+		require_once SLI_PLUGIN_DIR . '/includes/sli-helper.php';
+		require_once SLI_PLUGIN_DIR . '/includes/sli-login-tracker.php';
+		require_once SLI_PLUGIN_DIR . '/includes/sli-user-columns.php';
+		require_once SLI_PLUGIN_DIR . '/includes/sli-user-profile.php';
+		require_once SLI_PLUGIN_DIR . '/includes/sli-user-filters.php';
+		require_once SLI_PLUGIN_DIR . '/includes/sli-rest-controller.php';
 
 		if ( is_admin() ) {
-			require_once WPLL_PLUGIN_DIR . '/admin/wpll-admin.php';
+			require_once SLI_PLUGIN_DIR . '/admin/sli-admin.php';
 		}
 	}
 	/**
@@ -204,14 +204,14 @@ class WPLL_Plugin {
 	 */
 	private function init_classes() {
 
-		$this->login_tracker = new WPLL_Login_Tracker();
-		$this->user_columns = new WPLL_User_Columns();
-		$this->user_profile = new WPLL_User_Profile();
-		$this->user_filters = new WPLL_User_Filters();
-		$this->rest_controller = new WPLL_REST_Controller();
+		$this->login_tracker = new SLI_Login_Tracker();
+		$this->user_columns = new SLI_User_Columns();
+		$this->user_profile = new SLI_User_Profile();
+		$this->user_filters = new SLI_User_Filters();
+		$this->rest_controller = new SLI_REST_Controller();
 
 		if ( is_admin() ) {
-			$this->admin = new WPLL_Admin();
+			$this->admin = new SLI_Admin();
 		}
 	}
 	/**
@@ -223,7 +223,7 @@ class WPLL_Plugin {
 	 */
 	public function activate() {
 
-		WPLL_Activator::activate();
+		SLI_Activator::activate();
 	}
 
 	/**
@@ -252,11 +252,11 @@ class WPLL_Plugin {
  *
  * @since 1.0.0
  *
- * @return WPLL_Plugin
+ * @return SLI_Plugin
  */
 function WPLL() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 
-	return WPLL_Plugin::instance();
+	return SLI_Plugin::instance();
 }
 
 /**

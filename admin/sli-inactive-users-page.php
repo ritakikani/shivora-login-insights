@@ -2,7 +2,7 @@
 /**
  * Inactive Users Page.
  *
- * @package WP_Last_Login_Tracker
+ * @package Shivora_Login_Insights
  * @since   1.0.0
  */
 
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class WPLL_Inactive_Users_Page {
+class SLI_Inactive_Users_Page {
 
 	/**
 	 * Constructor.
@@ -61,11 +61,11 @@ class WPLL_Inactive_Users_Page {
 	public function register_submenu() {
 
 		add_submenu_page(
-			'wpll-overview',
+			'sli-overview',
 			__( 'Inactive Users', 'last-login-tracker' ),
 			__( 'Inactive Users', 'last-login-tracker' ),
 			'list_users',
-			'wpll-inactive-users',
+			'sli-inactive-users',
 			array(
 				$this,
 				'render_page',
@@ -119,7 +119,7 @@ class WPLL_Inactive_Users_Page {
 				<input
 					type="hidden"
 					name="page"
-					value="wpll-inactive-users"
+					value="sli-inactive-users"
 				/>
 
 				<select name="days">
@@ -213,8 +213,8 @@ class WPLL_Inactive_Users_Page {
 								<td>
 
 									<?php echo esc_html(
-										WPLL_Helper::format_login_date(
-											WPLL_Helper::get_last_login(
+										SLI_Helper::format_login_date(
+											SLI_Helper::get_last_login(
 												$user->ID
 											)
 										)
@@ -225,7 +225,7 @@ class WPLL_Inactive_Users_Page {
 								<td>
 
 									<?php echo esc_html(
-										WPLL_Helper::get_last_login_ip(
+										SLI_Helper::get_last_login_ip(
 											$user->ID
 										)
 									); ?>

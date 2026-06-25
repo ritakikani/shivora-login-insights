@@ -2,7 +2,7 @@
 /**
  * Settings.
  *
- * @package WP_Last_Login_Tracker
+ * @package Shivora_Login_Insights
  * @since   1.0.0
  */
 
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class WPLL_Settings {
+class SLI_Settings {
 
 	/**
 	 * Constructor.
@@ -69,11 +69,11 @@ class WPLL_Settings {
 	public function register_submenu() {
 
 		add_submenu_page(
-			'wpll-overview',
+			'sli-overview',
 			__( 'Settings', 'last-login-tracker' ),
 			__( 'Settings', 'last-login-tracker' ),
 			'manage_options',
-			'wpll-settings',
+			'sli-settings',
 			array(
 				$this,
 				'render_page',
@@ -152,7 +152,7 @@ class WPLL_Settings {
 	 */
 	public function render_page() {
 
-		$settings = WPLL_Helper::get_settings();
+		$settings = SLI_Helper::get_settings();
 
 		?>
 

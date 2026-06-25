@@ -2,7 +2,7 @@
 /**
  * Admin Menu.
  *
- * @package WP_Last_Login_Tracker
+ * @package Shivora_Login_Insights
  * @since   1.0.0
  */
 
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class WPLL_Admin_Menu {
+class SLI_Admin_Menu {
 
 	/**
 	 * Constructor.
@@ -70,7 +70,7 @@ class WPLL_Admin_Menu {
 			__( 'Last Login Tracker', 'last-login-tracker' ),
 			__( 'Last Login Tracker', 'last-login-tracker' ),
 			'list_users',
-			'wpll-overview',
+			'sli-overview',
 			array(
 				$this,
 				'overview_page',
@@ -91,15 +91,15 @@ class WPLL_Admin_Menu {
 
 		$total_users = count_users();
 
-		$logged_today = WPLL_Helper::get_logged_in_today_count();
+		$logged_today = SLI_Helper::get_logged_in_today_count();
 
-		$never_logged_in = WPLL_Helper::get_never_logged_in_count();
+		$never_logged_in = SLI_Helper::get_never_logged_in_count();
 
-		$inactive_30 = WPLL_Helper::get_inactive_users_count( 30 );
+		$inactive_30 = SLI_Helper::get_inactive_users_count( 30 );
 
-		$inactive_60 = WPLL_Helper::get_inactive_users_count( 60 );
+		$inactive_60 = SLI_Helper::get_inactive_users_count( 60 );
 
-		$inactive_90 = WPLL_Helper::get_inactive_users_count( 90 );
+		$inactive_90 = SLI_Helper::get_inactive_users_count( 90 );
 
 		?>
 

@@ -2,7 +2,7 @@
 /**
  * Plugin Activator.
  *
- * @package WP_Last_Login_Tracker
+ * @package Shivora_Login_Insights
  * @since   1.0.0
  */
 
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class WPLL_Activator {
+class SLI_Activator {
 
 	/**
 	 * Run plugin activation tasks.
@@ -53,7 +53,7 @@ class WPLL_Activator {
 		 */
 		update_option(
 			'wpll_version',
-			WPLL_VERSION
+			SLI_VERSION
 		);
 
 		/**

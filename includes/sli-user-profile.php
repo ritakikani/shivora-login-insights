@@ -2,7 +2,7 @@
 /**
  * User Profile.
  *
- * @package WP_Last_Login_Tracker
+ * @package Shivora_Login_Insights
  * @since   1.0.0
  */
 
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class WPLL_User_Profile {
+class SLI_User_Profile {
 
 	/**
 	 * Constructor.
@@ -64,11 +64,11 @@ class WPLL_User_Profile {
 	 */
 	public function display_login_information( $user ) {
 
-		$last_login = WPLL_Helper::get_last_login(
+		$last_login = SLI_Helper::get_last_login(
 			$user->ID
 		);
 
-		$last_login_ip = WPLL_Helper::get_last_login_ip(
+		$last_login_ip = SLI_Helper::get_last_login_ip(
 			$user->ID
 		);
 
@@ -107,7 +107,7 @@ class WPLL_User_Profile {
 
 					<?php
 					echo esc_html(
-						WPLL_Helper::format_login_date(
+						SLI_Helper::format_login_date(
 							$last_login
 						)
 					);

@@ -2,7 +2,7 @@
 /**
  * REST Controller.
  *
- * @package WP_Last_Login_Tracker
+ * @package Shivora_Login_Insights
  * @since   1.0.0
  */
 
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class WPLL_REST_Controller {
+class SLI_REST_Controller {
 
 	/**
 	 * Constructor.
@@ -148,10 +148,10 @@ class WPLL_REST_Controller {
 			'username'      => $user->user_login,
 			'display_name'  => $user->display_name,
 			'email'         => $user->user_email,
-			'last_login'    => WPLL_Helper::get_last_login(
+			'last_login'    => SLI_Helper::get_last_login(
 				$user->ID
 			),
-			'last_login_ip' => WPLL_Helper::get_last_login_ip(
+			'last_login_ip' => SLI_Helper::get_last_login_ip(
 				$user->ID
 			),
 		);
@@ -209,7 +209,7 @@ class WPLL_REST_Controller {
 				'username'     => $user->user_login,
 				'display_name' => $user->display_name,
 				'email'        => $user->user_email,
-				'last_login'   => WPLL_Helper::get_last_login(
+				'last_login'   => SLI_Helper::get_last_login(
 					$user->ID
 				),
 			);

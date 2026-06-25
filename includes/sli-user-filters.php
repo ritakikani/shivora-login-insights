@@ -2,7 +2,7 @@
 /**
  * User Filters.
  *
- * @package WP_Last_Login_Tracker
+ * @package Shivora_Login_Insights
  * @since   1.0.0
  */
 
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class WPLL_User_Filters {
+class SLI_User_Filters {
 
 	/**
 	 * Constructor.

@@ -1,4 +1,4 @@
-=== Last Login Tracker ===
+=== Shivora Login Insights ===
 Contributors: kikanirita
 Tags: users, login, last login, user management, inactive users, admin tools
 Requires at least: 6.0
@@ -12,7 +12,7 @@ Track user login activity, IP addresses, inactive users, and export login data d
 
 == Description ==
 
-Last Login Tracker helps administrators monitor user activity by recording login timestamps and IP addresses. It provides powerful reporting tools, inactive user detection, CSV exports, dashboard insights, and REST API access.
+Shivora Login Insights helps administrators monitor user activity by recording login timestamps and IP addresses. It provides powerful reporting tools, inactive user detection, CSV exports, dashboard insights, and REST API access.
 
 Perfect for membership sites, organizations, intranets, learning platforms, and communities that need visibility into user engagement.
 
@@ -68,9 +68,9 @@ Developers can integrate login tracking information into custom dashboards, repo
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/last-login-tracker` directory.
+1. Upload the plugin files to the `/wp-content/plugins/shivora-login-insights/` directory.
 2. Activate the plugin through the "Plugins" screen in WordPress.
-3. Navigate to Users → Last Login Tracker or the plugin settings page.
+3. Navigate to Users → Shivora Login Insights or the plugin settings page.
 4. Configure your preferred settings.
 5. Start monitoring user activity.
 
@@ -125,7 +125,7 @@ Compatibility depends on your installation and configuration. Testing is recomme
 
 = 1.0.0 =
 
-Initial public release of Last Login Tracker.
+Initial public release of Shivora Login Insights.
 
 == Privacy ==
 

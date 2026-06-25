@@ -2,7 +2,7 @@
 /**
  * User Columns.
  *
- * @package WP_Last_Login_Tracker
+ * @package Shivora_Login_Insights
  * @since   1.0.0
  */
 
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class WPLL_User_Columns {
+class SLI_User_Columns {
 
 	/**
 	 * Constructor.
@@ -81,7 +81,7 @@ class WPLL_User_Columns {
 			'last-login-tracker'
 		);
 
-		$settings = WPLL_Helper::get_settings();
+		$settings = SLI_Helper::get_settings();
 
 		if ( ! empty( $settings['track_ip'] ) ) {
 
@@ -115,19 +115,19 @@ class WPLL_User_Columns {
 
 			case 'wpll_last_login':
 
-				$timestamp = WPLL_Helper::get_last_login(
+				$timestamp = SLI_Helper::get_last_login(
 					$user_id
 				);
 
 				return esc_html(
-					WPLL_Helper::format_login_date(
+					SLI_Helper::format_login_date(
 						$timestamp
 					)
 				);
 
 			case 'wpll_last_login_ip':
 
-				$ip = WPLL_Helper::get_last_login_ip(
+				$ip = SLI_Helper::get_last_login_ip(
 					$user_id
 				);
 

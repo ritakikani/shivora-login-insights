@@ -2,7 +2,7 @@
 /**
  * Helper Functions.
  *
- * @package WP_Last_Login_Tracker
+ * @package Shivora_Login_Insights
  * @since   1.0.0
  */
 
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class WPLL_Helper {
+class SLI_Helper {
 
 	/**
 	 * Get plugin settings.

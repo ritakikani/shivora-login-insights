@@ -1,10 +1,10 @@
-# Last Login Tracker
+# Shivora Login Insights
 
 A powerful WordPress plugin that helps administrators monitor user activity by tracking login dates, login IP addresses, inactive users, and exporting activity reports.
 
 ## 🚀 Overview
 
-Last Login Tracker provides valuable insights into user engagement and account activity. It records login information automatically and presents it through an intuitive admin interface, helping site owners manage users more effectively.
+LoginLens Activity Tracker provides valuable insights into user engagement and account activity. It records login information automatically and presents it through an intuitive admin interface, helping site owners manage users more effectively.
 
 Whether you're running a membership site, e-learning platform, community website, intranet, or customer portal, this plugin gives you the visibility needed to understand user activity.
 
@@ -106,7 +106,7 @@ Site administrators are responsible for ensuring compliance with applicable priv
 Clone the repository:
 
 ```bash
-git clone https://github.com/ritakikani/last-login-tracker.git
+git clone https://github.com/ritakikani/shivora-login-insights.git
 ```
 
 Install the plugin into your WordPress environment and activate it for testing.
@@ -135,7 +135,7 @@ This project is licensed under the GNU General Public License v2.0 or later (GPL
 WordPress Plugin Developer
 
 GitHub Repository:
-https://github.com/ritakikani/last-login-tracker
+https://github.com/ritakikani/shivora-login-insights
 
 ---
 

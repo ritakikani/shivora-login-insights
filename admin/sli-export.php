@@ -2,7 +2,7 @@
 /**
  * Export.
  *
- * @package WP_Last_Login_Tracker
+ * @package Shivora_Login_Insights
  * @since   1.0.0
  */
 
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class WPLL_Export {
+class SLI_Export {
 
 	/**
 	 * Constructor.
@@ -69,11 +69,11 @@ class WPLL_Export {
 	public function register_submenu() {
 
 		add_submenu_page(
-			'wpll-overview',
+			'sli-overview',
 			__( 'Export', 'last-login-tracker' ),
 			__( 'Export', 'last-login-tracker' ),
 			'list_users',
-			'wpll-export',
+			'sli-export',
 			array(
 				$this,
 				'render_page',
@@ -175,7 +175,7 @@ class WPLL_Export {
 		$users = get_users();
 
 		$filename = sprintf(
-			'wpll-export-%s.csv',
+			'sli-export-%s.csv',
 			wp_date( 'Y-m-d-H-i-s' )
 		);
 
@@ -210,12 +210,12 @@ class WPLL_Export {
 					$user->user_login,
 					$user->display_name,
 					$user->user_email,
-					WPLL_Helper::format_login_date(
-						WPLL_Helper::get_last_login(
+					SLI_Helper::format_login_date(
+						SLI_Helper::get_last_login(
 							$user->ID
 						)
 					),
-					WPLL_Helper::get_last_login_ip(
+					SLI_Helper::get_last_login_ip(
 						$user->ID
 					),
 				)

@@ -2,7 +2,7 @@
 /**
  * Login Tracker.
  *
- * @package WP_Last_Login_Tracker
+ * @package Shivora_Login_Insights
  * @since   1.0.0
  */
 
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class WPLL_Login_Tracker {
+class SLI_Login_Tracker {
 
 	/**
 	 * Constructor.
@@ -85,7 +85,7 @@ class WPLL_Login_Tracker {
 		 * Check plugin settings before
 		 * saving IP address.
 		 */
-		$settings = WPLL_Helper::get_settings();
+		$settings = SLI_Helper::get_settings();
 
 		if ( empty( $settings['track_ip'] ) ) {
 			return;
@@ -97,7 +97,7 @@ class WPLL_Login_Tracker {
 		update_user_meta(
 			$user->ID,
 			'wpll_last_login_ip',
-			WPLL_Helper::get_user_ip()
+			SLI_Helper::get_user_ip()
 		);
 
 		/**

@@ -2,7 +2,7 @@
 /**
  * Dashboard Widget.
  *
- * @package WP_Last_Login_Tracker
+ * @package Shivora_Login_Insights
  * @since   1.0.0
  */
 
@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class WPLL_Dashboard_Widget {
+class SLI_Dashboard_Widget {
 
 	/**
 	 * Constructor.
@@ -58,7 +58,7 @@ class WPLL_Dashboard_Widget {
 	 */
 	public function register_widget() {
 
-		$settings = WPLL_Helper::get_settings();
+		$settings = SLI_Helper::get_settings();
 
 		if ( empty( $settings['dashboard_widget'] ) ) {
 			return;
@@ -85,11 +85,11 @@ class WPLL_Dashboard_Widget {
 
 		$total_users = count_users();
 
-		$logged_today = WPLL_Helper::get_logged_in_today_count();
+		$logged_today = SLI_Helper::get_logged_in_today_count();
 
-		$never_logged_in = WPLL_Helper::get_never_logged_in_count();
+		$never_logged_in = SLI_Helper::get_never_logged_in_count();
 
-		$inactive_30 = WPLL_Helper::get_inactive_users_count(
+		$inactive_30 = SLI_Helper::get_inactive_users_count(
 			30
 		);
 
@@ -227,8 +227,8 @@ class WPLL_Dashboard_Widget {
 
 							<td>
 								<?php echo esc_html(
-									WPLL_Helper::format_login_date(
-										WPLL_Helper::get_last_login(
+									SLI_Helper::format_login_date(
+										SLI_Helper::get_last_login(
 											$user->ID
 										)
 									)
@@ -247,7 +247,7 @@ class WPLL_Dashboard_Widget {
 
 		<p>
 
-			<a href="<?php echo esc_url( admin_url( 'users.php?page=wpll-overview' ) ); ?>">
+			<a href="<?php echo esc_url( admin_url( 'users.php?page=sli-overview' ) ); ?>">
 
 				<?php esc_html_e(
 					'View Full Report',

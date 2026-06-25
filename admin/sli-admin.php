@@ -2,7 +2,7 @@
 /**
  * Admin Class.
  *
- * @package WP_Last_Login_Tracker
+ * @package Shivora_Login_Insights
  * @since   1.0.0
  */
 
@@ -19,40 +19,40 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class WPLL_Admin {
+class SLI_Admin {
 
 	/**
 	 * Admin menu.
 	 *
-	 * @var WPLL_Admin_Menu
+	 * @var SLI_Admin_Menu
 	 */
 	public $menu;
 
 	/**
 	 * Dashboard widget.
 	 *
-	 * @var WPLL_Dashboard_Widget
+	 * @var SLI_Dashboard_Widget
 	 */
 	public $dashboard_widget;
 
 	/**
 	 * Settings.
 	 *
-	 * @var WPLL_Settings
+	 * @var SLI_Settings
 	 */
 	public $settings;
 
 	/**
 	 * Inactive users page.
 	 *
-	 * @var WPLL_Inactive_Users_Page
+	 * @var SLI_Inactive_Users_Page
 	 */
 	public $inactive_users_page;
 
 	/**
 	 * Export.
 	 *
-	 * @var WPLL_Export
+	 * @var SLI_Export
 	 */
 	public $export;
 
@@ -73,15 +73,15 @@ class WPLL_Admin {
 	 */
 	private function includes() {
 
-		require_once WPLL_PLUGIN_DIR . '/admin/wpll-admin-menu.php';
+		require_once SLI_PLUGIN_DIR . '/admin/sli-admin-menu.php';
 
-		require_once WPLL_PLUGIN_DIR . '/admin/wpll-dashboard-widget.php';
+		require_once SLI_PLUGIN_DIR . '/admin/sli-dashboard-widget.php';
 
-		require_once WPLL_PLUGIN_DIR . '/admin/wpll-settings.php';
+		require_once SLI_PLUGIN_DIR . '/admin/sli-settings.php';
 
-		require_once WPLL_PLUGIN_DIR . '/admin/wpll-inactive-users-page.php';
+		require_once SLI_PLUGIN_DIR . '/admin/sli-inactive-users-page.php';
 
-		require_once WPLL_PLUGIN_DIR . '/admin/wpll-export.php';
+		require_once SLI_PLUGIN_DIR . '/admin/sli-export.php';
 	}
 
 	/**
@@ -91,14 +91,14 @@ class WPLL_Admin {
 	 */
 	private function init_classes() {
 
-		$this->menu = new WPLL_Admin_Menu();
+		$this->menu = new SLI_Admin_Menu();
 
-		$this->dashboard_widget = new WPLL_Dashboard_Widget();
+		$this->dashboard_widget = new SLI_Dashboard_Widget();
 
-		$this->settings = new WPLL_Settings();
+		$this->settings = new SLI_Settings();
 
-		$this->inactive_users_page = new WPLL_Inactive_Users_Page();
+		$this->inactive_users_page = new SLI_Inactive_Users_Page();
 
-		$this->export = new WPLL_Export();
+		$this->export = new SLI_Export();
 	}
 }
