@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SLI_REST_Controller {
+class SHIVLI_REST_Controller {
 	/**
 	 * Constructor.
 	 *
@@ -46,7 +46,7 @@ class SLI_REST_Controller {
 	 */
 	public function register_routes() {
 		register_rest_route(
-			'sli/v1',
+			'shivli/v1',
 			'/user/(?P<id>\d+)',
 			array(
 				'methods'             => WP_REST_Server::READABLE,
@@ -61,7 +61,7 @@ class SLI_REST_Controller {
 			)
 		);
 		register_rest_route(
-			'sli/v1',
+			'shivli/v1',
 			'/inactive-users',
 			array(
 				'methods'             => WP_REST_Server::READABLE,
@@ -98,7 +98,7 @@ class SLI_REST_Controller {
 	 * Get user activity.
 	 *
 	 * Endpoint:
-	 * /wp-json/sli/v1/user/{id}
+	 * /wp-json/shivli/v1/user/{id}
 	 *
 	 * @since 1.0.0
 	 *
@@ -115,7 +115,7 @@ class SLI_REST_Controller {
 		);
 		if ( ! $user ) {
 			return new WP_Error(
-				'sli_user_not_found',
+				'shivli_user_not_found',
 				__(
 					'User not found.',
 					'shivora-login-insights'
@@ -130,10 +130,10 @@ class SLI_REST_Controller {
 			'username'      => $user->user_login,
 			'display_name'  => $user->display_name,
 			'email'         => $user->user_email,
-			'last_login'    => SLI_Helper::get_last_login(
+			'last_login'    => SHIVLI_Helper::get_last_login(
 				$user->ID
 			),
-			'last_login_ip' => SLI_Helper::get_last_login_ip(
+			'last_login_ip' => SHIVLI_Helper::get_last_login_ip(
 				$user->ID
 			),
 		);
@@ -146,7 +146,7 @@ class SLI_REST_Controller {
 	 * Get inactive users.
 	 *
 	 * Endpoint:
-	* /wp-json/sli/v1/inactive-users?days=30
+	* /wp-json/shivli/v1/inactive-users?days=30
 	 *
 	 * @since 1.0.0
 	 *
@@ -183,7 +183,7 @@ class SLI_REST_Controller {
 				'username'     => $user->user_login,
 				'display_name' => $user->display_name,
 				'email'        => $user->user_email,
-				'last_login'   => SLI_Helper::get_last_login(
+				'last_login'   => SHIVLI_Helper::get_last_login(
 					$user->ID
 				),
 			);

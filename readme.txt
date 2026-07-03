@@ -1,6 +1,6 @@
 === Shivora Login Insights ===
 Contributors: kikanirita
-Donate link: https://buymeacoffee.com/sanganireeta
+Donate link: https://buymeacoffee.com/sanganireeu
 Tags: login, last login, users, user activity, user management
 Requires at least: 6.0
 Tested up to: 7.0
@@ -101,7 +101,7 @@ Compatibility depends on your installation and configuration. Testing is recomme
 
 If Shivora Login Insights has been helpful, you can support future development by buying me a coffee:
 
-https://buymeacoffee.com/sanganireeta
+https://buymeacoffee.com/sanganireeu
 
 == Screenshots ==
 

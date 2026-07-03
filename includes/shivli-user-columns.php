@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SLI_User_Columns {
+class SHIVLI_User_Columns {
 
 	/**
 	 * Constructor.
@@ -67,9 +67,9 @@ class SLI_User_Columns {
 			'Last Login',
 			'shivora-login-insights'
 		);
-		$settings = SLI_Helper::get_settings();
+		$settings = SHIVLI_Helper::get_settings();
 		if ( ! empty( $settings['track_ip'] ) ) {
-			$columns['sli_last_login_ip'] = __(
+			$columns['shivli_last_login_ip'] = __(
 				'Login IP',
 				'shivora-login-insights'
 			);
@@ -91,16 +91,16 @@ class SLI_User_Columns {
 	public function render_columns($value,	$column_name, $user_id) {
 		switch ( $column_name ) {
 			case 'shivora_login_insights':
-				$timestamp = SLI_Helper::get_last_login(
+				$timestamp = SHIVLI_Helper::get_last_login(
 					$user_id
 				);
 				return esc_html(
-					SLI_Helper::format_login_date(
+					SHIVLI_Helper::format_login_date(
 						$timestamp
 					)
 				);
-			case 'sli_last_login_ip':
-				$ip = SLI_Helper::get_last_login_ip(
+			case 'shivli_last_login_ip':
+				$ip = SHIVLI_Helper::get_last_login_ip(
 					$user_id
 				);
 				return ! empty( $ip )

@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SLI_User_Profile {
+class SHIVLI_User_Profile {
 
 	/**
 	 * Constructor.
@@ -56,11 +56,11 @@ class SLI_User_Profile {
 	 */
 	public function display_login_information( $user ) {
 
-		$last_login = SLI_Helper::get_last_login(
+		$last_login = SHIVLI_Helper::get_last_login(
 			$user->ID
 		);
 
-		$last_login_ip = SLI_Helper::get_last_login_ip(
+		$last_login_ip = SHIVLI_Helper::get_last_login_ip(
 			$user->ID
 		);
 
@@ -86,7 +86,7 @@ class SLI_User_Profile {
 				</th>
 				<td>
 					<?php echo esc_html(
-						SLI_Helper::format_login_date(
+						SHIVLI_Helper::format_login_date(
 							$last_login
 						)
 					);?>

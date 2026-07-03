@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SLI_Login_Tracker {
+class SHIVLI_Login_Tracker {
 
 	/**
 	 * Constructor.
@@ -76,7 +76,7 @@ class SLI_Login_Tracker {
 		 * Check plugin settings before
 		 * saving IP address.
 		 */
-		$settings = SLI_Helper::get_settings();
+		$settings = SHIVLI_Helper::get_settings();
 
 		if ( empty( $settings['track_ip'] ) ) {
 			return;
@@ -87,8 +87,8 @@ class SLI_Login_Tracker {
 		 */
 		update_user_meta(
 			$user->ID,
-			'sli_last_login_ip',
-			SLI_Helper::get_user_ip()
+			'shivli_last_login_ip',
+			SHIVLI_Helper::get_user_ip()
 		);
 
 		/**
@@ -96,7 +96,7 @@ class SLI_Login_Tracker {
 		 * successful login tracking.
 		 */
 		do_action(
-			'sli_after_track_login',
+			'shivli_after_track_login',
 			$user->ID,
 			$user
 		);

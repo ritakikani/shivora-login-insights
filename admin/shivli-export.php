@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SLI_Export {
+class SHIVLI_Export {
 
 	/**
 	 * Constructor.
@@ -58,11 +58,11 @@ class SLI_Export {
 	 */
 	public function register_submenu() {
 		add_submenu_page(
-			'sli-overview',
+			'shivli-overview',
 			__( 'Export', 'shivora-login-insights' ),
 			__( 'Export', 'shivora-login-insights' ),
 			'list_users',
-			'sli-export',
+			'shivli-export',
 			array(
 				$this,
 				'render_page',
@@ -88,8 +88,8 @@ class SLI_Export {
 			</p>
 
 			<form method="post">
-				<?php wp_nonce_field('sli_export_users', 'sli_export_nonce');?>
-				<input type="hidden" name="sli_action" value="export_users" />
+				<?php wp_nonce_field('shivli_export_users', 'shivli_export_nonce');?>
+				<input type="hidden" name="shivli_action" value="export_users" />
 				<?php submit_button(__( 'Export CSV', 'shivora-login-insights' )); ?>
 			</form>
 
@@ -106,11 +106,11 @@ class SLI_Export {
 	 */
 	public function handle_export() {
 
-		if ( empty( $_POST['sli_action'] ) ) {
+		if ( empty( $_POST['shivli_action'] ) ) {
 			return;
 		}
 
-		if ( 'export_users' !== $_POST['sli_action'] ) {
+		if ( 'export_users' !== $_POST['shivli_action'] ) {
 			return;
 		}
 
@@ -119,8 +119,8 @@ class SLI_Export {
 		}
 
 		check_admin_referer(
-			'sli_export_users',
-			'sli_export_nonce'
+			'shivli_export_users',
+			'shivli_export_nonce'
 		);
 
 		$this->export_csv();
@@ -138,7 +138,7 @@ class SLI_Export {
 		$users = get_users();
 
 		$filename = sprintf(
-			'sli-export-%s.csv',
+			'shivli-export-%s.csv',
 			wp_date( 'Y-m-d-H-i-s' )
 		);
 
@@ -172,12 +172,12 @@ class SLI_Export {
 					$user->user_login,
 					$user->display_name,
 					$user->user_email,
-					SLI_Helper::format_login_date(
-						SLI_Helper::get_last_login(
+					SHIVLI_Helper::format_login_date(
+						SHIVLI_Helper::get_last_login(
 							$user->ID
 						)
 					),
-					SLI_Helper::get_last_login_ip(
+					SHIVLI_Helper::get_last_login_ip(
 						$user->ID
 					),
 				)

@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SLI_Helper {
+class SHIVLI_Helper {
 
 	/**
 	 * Get plugin settings.
@@ -29,7 +29,7 @@ class SLI_Helper {
 			'retention'        => 'forever',
 		);
 		$settings = get_option(
-			'sli_settings',
+			'shivli_settings',
 			array()
 		);
 		return wp_parse_args(
@@ -67,7 +67,7 @@ class SLI_Helper {
 	public static function get_last_login_ip( $user_id ) {
 		return (string) get_user_meta(
 			$user_id,
-			'sli_last_login_ip',
+			'shivli_last_login_ip',
 			true
 		);
 	}

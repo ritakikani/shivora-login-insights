@@ -113,7 +113,7 @@ Install the plugin into your WordPress environment and activate it for testing.
 
 ## ❤️ Support Development
 
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support-yellow?logo=buymeacoffee)](https://buymeacoffee.com/sanganireeta)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support-yellow?logo=buymeacoffee)](https://buymeacoffee.com/sanganireeu)
 
 ## 📝 Changelog
 

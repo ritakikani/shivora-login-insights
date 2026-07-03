@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SLI_Activator {
+class SHIVLI_Activator {
 
 	/**
 	 * Run plugin activation tasks.
@@ -27,9 +27,9 @@ class SLI_Activator {
 		 * Create default plugin settings
 		 * only if they don't already exist.
 		 */
-		if ( false === get_option( 'sli_settings' ) ) {
+		if ( false === get_option( 'shivli_settings' ) ) {
 			add_option(
-				'sli_settings',
+				'shivli_settings',
 				array(
 					'track_ip'         => 1,
 					'dashboard_widget' => 1,
@@ -44,8 +44,8 @@ class SLI_Activator {
 		 * Useful for future upgrade routines.
 		 */
 		update_option(
-			'sli_version',
-			SLI_VERSION
+			'shivli_version',
+			SHIVLI_VERSION
 		);
 
 		/**
@@ -54,7 +54,7 @@ class SLI_Activator {
 		 * Allows future modules or add-ons
 		 * to perform their own activation tasks.
 		 */
-		do_action( 'sli_activate' );
+		do_action( 'shivli_activate' );
 
 		/**
 		 * Flush rewrite rules.

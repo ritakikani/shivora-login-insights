@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SLI_Plugin {
+class SHIVLI_Plugin {
 
 	/**
 	 * Plugin instance.
@@ -37,42 +37,42 @@ class SLI_Plugin {
 	/**
 	 * Login tracker module.
 	 *
-	 * @var SLI_Login_Tracker
+	 * @var SHIVLI_Login_Tracker
 	 */
 	public $login_tracker;
 
 	/**
 	 * User columns module.
 	 *
-	 * @var SLI_User_Columns
+	 * @var SHIVLI_User_Columns
 	 */
 	public $user_columns;
 
 	/**
 	 * User profile module.
 	 *
-	 * @var SLI_User_Profile
+	 * @var SHIVLI_User_Profile
 	 */
 	public $user_profile;
 
 	/**
 	 * User filters module.
 	 *
-	 * @var SLI_User_Filters
+	 * @var SHIVLI_User_Filters
 	 */
 	public $user_filters;
 
 	/**
 	 * REST controller module.
 	 *
-	 * @var SLI_REST_Controller
+	 * @var SHIVLI_REST_Controller
 	 */
 	public $rest_controller;
 
 	/**
 	 * Admin module.
 	 *
-	 * @var SLI_Admin
+	 * @var SHIVLI_Admin
 	 */
 	public $admin;
 
@@ -135,26 +135,26 @@ class SLI_Plugin {
 	 */
 	private function define_constants() {
 
-		if ( ! defined( 'SLI_VERSION' ) ) {
-			define( 'SLI_VERSION', '1.0.0' );
+		if ( ! defined( 'SHIVLI_VERSION' ) ) {
+			define( 'SHIVLI_VERSION', '1.0.0' );
 		}
 
-		if ( ! defined( 'SLI_PLUGIN_FILE' ) ) {
-			define( 'SLI_PLUGIN_FILE', __FILE__ );
+		if ( ! defined( 'SHIVLI_PLUGIN_FILE' ) ) {
+			define( 'SHIVLI_PLUGIN_FILE', __FILE__ );
 		}
 
-		if ( ! defined( 'SLI_PLUGIN_DIR' ) ) {
+		if ( ! defined( 'SHIVLI_PLUGIN_DIR' ) ) {
 			define(
-				'SLI_PLUGIN_DIR',
+				'SHIVLI_PLUGIN_DIR',
 				untrailingslashit(
 					plugin_dir_path( __FILE__ )
 				)
 			);
 		}
 
-		if ( ! defined( 'SLI_PLUGIN_URL' ) ) {
+		if ( ! defined( 'SHIVLI_PLUGIN_URL' ) ) {
 			define(
-				'SLI_PLUGIN_URL',
+				'SHIVLI_PLUGIN_URL',
 				untrailingslashit(
 					plugin_dir_url( __FILE__ )
 				)
@@ -174,16 +174,16 @@ class SLI_Plugin {
 	 */
 	private function includes() {
 
-		require_once SLI_PLUGIN_DIR . '/includes/sli-activator.php';
-		require_once SLI_PLUGIN_DIR . '/includes/sli-helper.php';
-		require_once SLI_PLUGIN_DIR . '/includes/sli-login-tracker.php';
-		require_once SLI_PLUGIN_DIR . '/includes/sli-user-columns.php';
-		require_once SLI_PLUGIN_DIR . '/includes/sli-user-profile.php';
-		require_once SLI_PLUGIN_DIR . '/includes/sli-user-filters.php';
-		require_once SLI_PLUGIN_DIR . '/includes/sli-rest-controller.php';
+		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-activator.php';
+		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-helper.php';
+		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-login-tracker.php';
+		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-user-columns.php';
+		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-user-profile.php';
+		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-user-filters.php';
+		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-rest-controller.php';
 
 		if ( is_admin() ) {
-			require_once SLI_PLUGIN_DIR . '/admin/sli-admin.php';
+			require_once SHIVLI_PLUGIN_DIR . '/admin/shivli-admin.php';
 		}
 	}
 	/**
@@ -198,14 +198,14 @@ class SLI_Plugin {
 	 */
 	private function init_classes() {
 
-		$this->login_tracker = new SLI_Login_Tracker();
-		$this->user_columns = new SLI_User_Columns();
-		$this->user_profile = new SLI_User_Profile();
-		$this->user_filters = new SLI_User_Filters();
-		$this->rest_controller = new SLI_REST_Controller();
+		$this->login_tracker = new SHIVLI_Login_Tracker();
+		$this->user_columns = new SHIVLI_User_Columns();
+		$this->user_profile = new SHIVLI_User_Profile();
+		$this->user_filters = new SHIVLI_User_Filters();
+		$this->rest_controller = new SHIVLI_REST_Controller();
 
 		if ( is_admin() ) {
-			$this->admin = new SLI_Admin();
+			$this->admin = new SHIVLI_Admin();
 		}
 	}
 	/**
@@ -217,7 +217,7 @@ class SLI_Plugin {
 	 */
 	public function activate() {
 
-		SLI_Activator::activate();
+		SHIVLI_Activator::activate();
 	}
 }
 
@@ -226,14 +226,14 @@ class SLI_Plugin {
  *
  * @since 1.0.0
  *
- * @return SLI_Plugin
+ * @return SHIVLI_Plugin
  */
-function SLI() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+function SHIVLI() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 
-	return SLI_Plugin::instance();
+	return SHIVLI_Plugin::instance();
 }
 
 /**
  * Global plugin object.
  */
-$GLOBALS['sli'] = SLI();
+$GLOBALS['shivli'] = SHIVLI();

@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SLI_Inactive_Users_Page {
+class SHIVLI_Inactive_Users_Page {
 
 	/**
 	 * Constructor.
@@ -50,11 +50,11 @@ class SLI_Inactive_Users_Page {
 	 */
 	public function register_submenu() {
 		add_submenu_page(
-			'sli-overview',
+			'shivli-overview',
 			__( 'Inactive Users', 'shivora-login-insights' ),
 			__( 'Inactive Users', 'shivora-login-insights' ),
 			'list_users',
-			'sli-inactive-users',
+			'shivli-inactive-users',
 			array(
 				$this,
 				'render_page',
@@ -91,7 +91,7 @@ class SLI_Inactive_Users_Page {
 			</h1>
 
 			<form method="get">
-				<input type="hidden" name="page"	value="sli-inactive-users" />
+				<input type="hidden" name="page"	value="shivli-inactive-users" />
 				<select name="days">
 					<option value="never"><?php esc_html_e('Never Logged In', 'shivora-login-insights'); ?></option>
 					<option value="30" <?php selected( $days, 30 ); ?>><?php esc_html_e('30 Days', 'shivora-login-insights'); ?></option>
@@ -132,8 +132,8 @@ class SLI_Inactive_Users_Page {
 								</td>
 								<td>
 									<?php echo esc_html(
-										SLI_Helper::format_login_date(
-											SLI_Helper::get_last_login(
+										SHIVLI_Helper::format_login_date(
+											SHIVLI_Helper::get_last_login(
 												$user->ID
 											)
 										)
@@ -141,7 +141,7 @@ class SLI_Inactive_Users_Page {
 								</td>
 								<td>
 									<?php echo esc_html(
-										SLI_Helper::get_last_login_ip(
+										SHIVLI_Helper::get_last_login_ip(
 											$user->ID
 										)
 									); ?>

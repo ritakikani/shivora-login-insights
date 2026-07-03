@@ -4,7 +4,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 delete_option(
-	'sli_settings'
+	'shivli_settings'
 );
 
 $users = get_users(
@@ -20,6 +20,6 @@ foreach ( $users as $user_id ) {
 	);
 	delete_user_meta(
 		$user_id,
-		'sli_last_login_ip'
+		'shivli_last_login_ip'
 	);
 }

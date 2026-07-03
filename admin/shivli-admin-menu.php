@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SLI_Admin_Menu {
+class SHIVLI_Admin_Menu {
 
 	/**
 	 * Constructor.
@@ -60,7 +60,7 @@ class SLI_Admin_Menu {
 			__( 'Login Insights', 'shivora-login-insights' ),
 			__( 'Login Insights', 'shivora-login-insights' ),
 			'list_users',
-			'sli-overview',
+			'shivli-overview',
 			array(
 				$this,
 				'overview_page',
@@ -79,11 +79,11 @@ class SLI_Admin_Menu {
 	 */
 	public function overview_page() {
 		$total_users = count_users();
-		$logged_today = SLI_Helper::get_logged_in_today_count();
-		$never_logged_in = SLI_Helper::get_never_logged_in_count();
-		$inactive_30 = SLI_Helper::get_inactive_users_count( 30 );
-		$inactive_60 = SLI_Helper::get_inactive_users_count( 60 );
-		$inactive_90 = SLI_Helper::get_inactive_users_count( 90 ); ?>
+		$logged_today = SHIVLI_Helper::get_logged_in_today_count();
+		$never_logged_in = SHIVLI_Helper::get_never_logged_in_count();
+		$inactive_30 = SHIVLI_Helper::get_inactive_users_count( 30 );
+		$inactive_60 = SHIVLI_Helper::get_inactive_users_count( 60 );
+		$inactive_90 = SHIVLI_Helper::get_inactive_users_count( 90 ); ?>
 
 		<div class="wrap">
 			<h1>

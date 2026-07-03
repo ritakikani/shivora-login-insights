@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SLI_User_Filters {
+class SHIVLI_User_Filters {
 
 	/**
 	 * Constructor.
@@ -58,11 +58,11 @@ class SLI_User_Filters {
 			return;
 		}
 
-		$current_filter = isset( $_GET['sli_inactive'] )
-			? sanitize_text_field( wp_unslash( $_GET['sli_inactive'] ) )
+		$current_filter = isset( $_GET['shivli_inactive'] )
+			? sanitize_text_field( wp_unslash( $_GET['shivli_inactive'] ) )
 			: ''; ?>
 
-		<select name="sli_inactive">
+		<select name="shivli_inactive">
 			<option value="">
 				<?php esc_html_e('All Users', 'shivora-login-insights'); ?>
 			</option>
@@ -109,13 +109,13 @@ class SLI_User_Filters {
 			return;
 		}
 
-		if ( empty( $_GET['sli_inactive'] ) ) {
+		if ( empty( $_GET['shivli_inactive'] ) ) {
 			return;
 		}
 
 		$inactive_days = sanitize_text_field(
 			wp_unslash(
-				$_GET['sli_inactive']
+				$_GET['shivli_inactive']
 			)
 		);
 

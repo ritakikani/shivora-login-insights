@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SLI_Settings {
+class SHIVLI_Settings {
 
 	/**
 	 * Constructor.
@@ -58,11 +58,11 @@ class SLI_Settings {
 	 */
 	public function register_submenu() {
 		add_submenu_page(
-			'sli-overview',
+			'shivli-overview',
 			__( 'Settings', 'shivora-login-insights' ),
 			__( 'Settings', 'shivora-login-insights' ),
 			'manage_options',
-			'sli-settings',
+			'shivli-settings',
 			array(
 				$this,
 				'render_page',
@@ -79,8 +79,8 @@ class SLI_Settings {
 	 */
 	public function register_settings() {
 		register_setting(
-			'sli_settings_group',
-			'sli_settings',
+			'shivli_settings_group',
+			'shivli_settings',
 			array(
 				'sanitize_callback' => array(
 					$this,
@@ -126,14 +126,14 @@ class SLI_Settings {
 	 * @return void
 	 */
 	public function render_page() {
-		$settings = SLI_Helper::get_settings(); ?>
+		$settings = SHIVLI_Helper::get_settings(); ?>
 		<div class="wrap">
 			<h1>
 				<?php esc_html_e( 'Login Insights Settings', 'shivora-login-insights'); ?>
 			</h1>
 
 			<form method="post" action="options.php" >
-				<?php settings_fields( 'sli_settings_group' ); ?>
+				<?php settings_fields( 'shivli_settings_group' ); ?>
 				<table class="form-table">
 					<tr>
 						<th scope="row">
@@ -141,7 +141,7 @@ class SLI_Settings {
 						</th>
 						<td>
 							<label>
-								<input type="checkbox" name="sli_settings[track_ip]" value="1" <?php checked($settings['track_ip'], 1); ?> />
+								<input type="checkbox" name="shivli_settings[track_ip]" value="1" <?php checked($settings['track_ip'], 1); ?> />
 								<?php esc_html_e('Store user login IP address.',	'shivora-login-insights'); ?>
 							</label>
 						</td>
@@ -153,7 +153,7 @@ class SLI_Settings {
 						</th>
 						<td>
 							<label>
-								<input type="checkbox" name="sli_settings[dashboard_widget]" value="1" <?php checked($settings['dashboard_widget'], 1); ?> />
+								<input type="checkbox" name="shivli_settings[dashboard_widget]" value="1" <?php checked($settings['dashboard_widget'], 1); ?> />
 								<?php esc_html_e('Show dashboard widget.', 'shivora-login-insights' ); ?>
 							</label>
 						</td>
@@ -165,7 +165,7 @@ class SLI_Settings {
 						</th>
 
 						<td>
-							<select	name="sli_settings[retention]">
+							<select	name="shivli_settings[retention]">
 								<option value="30" <?php selected( $settings['retention'], '30' ); ?>>
 								    <?php esc_html_e('30 Days',	'shivora-login-insights'); ?>
 								</option>

@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class SLI_Dashboard_Widget {
+class SHIVLI_Dashboard_Widget {
 
 	/**
 	 * Constructor.
@@ -48,12 +48,12 @@ class SLI_Dashboard_Widget {
 	 * @return void
 	 */
 	public function register_widget() {
-		$settings = SLI_Helper::get_settings();
+		$settings = SHIVLI_Helper::get_settings();
 		if ( empty( $settings['dashboard_widget'] ) ) {
 			return;
 		}
 		wp_add_dashboard_widget(
-			'sli_dashboard_widget',
+			'shivli_dashboard_widget',
 			__( 'Login Insights', 'shivora-login-insights' ),
 			array( $this, 'render_widget' )
 		);
@@ -71,9 +71,9 @@ class SLI_Dashboard_Widget {
 	 */
 	public function render_widget() {
 		$total_users = count_users();
-		$logged_today = SLI_Helper::get_logged_in_today_count();
-		$never_logged_in = SLI_Helper::get_never_logged_in_count();
-		$inactive_30 = SLI_Helper::get_inactive_users_count( 30 );
+		$logged_today = SHIVLI_Helper::get_logged_in_today_count();
+		$never_logged_in = SHIVLI_Helper::get_never_logged_in_count();
+		$inactive_30 = SHIVLI_Helper::get_inactive_users_count( 30 );
 
 		$recent_users = get_users(
 			array(
@@ -146,8 +146,8 @@ class SLI_Dashboard_Widget {
 							</td>
 							<td>
 								<?php echo esc_html(
-									SLI_Helper::format_login_date(
-										SLI_Helper::get_last_login(
+									SHIVLI_Helper::format_login_date(
+										SHIVLI_Helper::get_last_login(
 											$user->ID
 										)
 									)
@@ -159,7 +159,7 @@ class SLI_Dashboard_Widget {
 			</table>
 		<?php endif; ?>
 		<p>
-			<a href="<?php echo esc_url( admin_url( 'users.php?page=sli-overview' ) ); ?>">
+			<a href="<?php echo esc_url( admin_url( 'users.php?page=shivli-overview' ) ); ?>">
 				<?php esc_html_e('View Full Report',	'shivora-login-insights'); ?>
 			</a>
 		</p>
