@@ -1,4 +1,5 @@
 <?php
+// Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -110,7 +111,7 @@ class SHIVLI_REST_Controller {
 		$user_id = absint(
 			$request['id']
 		);
-		$user = get_userdata(
+		$user    = get_userdata(
 			$user_id
 		);
 		if ( ! $user ) {
@@ -169,14 +170,14 @@ class SHIVLI_REST_Controller {
 				$days
 			)
 		);
-		$users = get_users(
+		$users     = get_users(
 			array(
 				'meta_key'     => 'shivora_login_insights',
 				'meta_value'   => $timestamp,
 				'meta_compare' => '<',
 			)
 		);
-		$response = array();
+		$response  = array();
 		foreach ( $users as $user ) {
 			$response[] = array(
 				'id'           => $user->ID,

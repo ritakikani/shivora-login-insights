@@ -10,6 +10,7 @@
  * Domain Path: /languages
  */
 
+// Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -87,6 +88,7 @@ class SHIVLI_Plugin {
 	 */
 	public static function instance() {
 
+		// Singleton: create the instance once and reuse it on every call.
 		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
 		}
@@ -135,6 +137,8 @@ class SHIVLI_Plugin {
 	 */
 	private function define_constants() {
 
+		// Guard each constant so the plugin can't fatal if this
+		// file is ever loaded more than once.
 		if ( ! defined( 'SHIVLI_VERSION' ) ) {
 			define( 'SHIVLI_VERSION', '1.0.0' );
 		}
@@ -182,10 +186,12 @@ class SHIVLI_Plugin {
 		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-user-filters.php';
 		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-rest-controller.php';
 
+		// Admin-only code has no purpose on the front end.
 		if ( is_admin() ) {
 			require_once SHIVLI_PLUGIN_DIR . '/admin/shivli-admin.php';
 		}
 	}
+
 	/**
 	 * Initialize plugin classes.
 	 *
@@ -198,16 +204,18 @@ class SHIVLI_Plugin {
 	 */
 	private function init_classes() {
 
-		$this->login_tracker = new SHIVLI_Login_Tracker();
-		$this->user_columns = new SHIVLI_User_Columns();
-		$this->user_profile = new SHIVLI_User_Profile();
-		$this->user_filters = new SHIVLI_User_Filters();
+		$this->login_tracker   = new SHIVLI_Login_Tracker();
+		$this->user_columns    = new SHIVLI_User_Columns();
+		$this->user_profile    = new SHIVLI_User_Profile();
+		$this->user_filters    = new SHIVLI_User_Filters();
 		$this->rest_controller = new SHIVLI_REST_Controller();
 
+		// Admin-only modules should never be instantiated on the front end.
 		if ( is_admin() ) {
 			$this->admin = new SHIVLI_Admin();
 		}
 	}
+
 	/**
 	 * Plugin activation callback.
 	 *

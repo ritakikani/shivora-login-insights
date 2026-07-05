@@ -1,4 +1,5 @@
 <?php
+// Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -67,7 +68,7 @@ class SHIVLI_User_Columns {
 			'Last Login',
 			'shivora-login-insights'
 		);
-		$settings = SHIVLI_Helper::get_settings();
+		$settings                          = SHIVLI_Helper::get_settings();
 		if ( ! empty( $settings['track_ip'] ) ) {
 			$columns['shivli_last_login_ip'] = __(
 				'Login IP',
@@ -88,7 +89,7 @@ class SHIVLI_User_Columns {
 	 *
 	 * @return string
 	 */
-	public function render_columns($value,	$column_name, $user_id) {
+	public function render_columns( $value, $column_name, $user_id ) {
 		switch ( $column_name ) {
 			case 'shivora_login_insights':
 				$timestamp = SHIVLI_Helper::get_last_login(
@@ -138,12 +139,16 @@ class SHIVLI_User_Columns {
 	 */
 	public function sort_users( $query ) {
 		global $pagenow;
+
+		// Only handle admin Users list requests.
 		if ( ! is_admin() ) {
 			return;
 		}
 		if ( 'users.php' !== $pagenow ) {
 			return;
 		}
+
+		// Only reorder the query when sorting by our custom column.
 		$order_by = $query->get( 'orderby' );
 		if ( 'shivora_login_insights' !== $order_by ) {
 			return;

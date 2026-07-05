@@ -1,4 +1,5 @@
 <?php
+// Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -66,6 +67,7 @@ class SHIVLI_User_Profile {
 
 		$days_since_login = '';
 
+		// Only calculate elapsed days when a login has actually been recorded.
 		if ( ! empty( $last_login ) ) {
 
 			$days_since_login = floor(
@@ -74,22 +76,24 @@ class SHIVLI_User_Profile {
 		} ?>
 
 		<h2>
-			<?php esc_html_e('Last Login Information', 'shivora-login-insights'); ?>
+			<?php esc_html_e( 'Last Login Information', 'shivora-login-insights' ); ?>
 		</h2>
 
 		<table class="form-table" role="presentation">
 			<tr>
 				<th>
 					<label>
-						<?php esc_html_e('Last Login', 'shivora-login-insights' ); ?>
+						<?php esc_html_e( 'Last Login', 'shivora-login-insights' ); ?>
 					</label>
 				</th>
 				<td>
-					<?php echo esc_html(
+					<?php
+					echo esc_html(
 						SHIVLI_Helper::format_login_date(
 							$last_login
 						)
-					);?>
+					);
+					?>
 				</td>
 			</tr>
 
@@ -97,7 +101,7 @@ class SHIVLI_User_Profile {
 				<tr>
 					<th>
 						<label>
-							<?php esc_html_e('Last Login IP', 'shivora-login-insights'); ?>
+							<?php esc_html_e( 'Last Login IP', 'shivora-login-insights' ); ?>
 						</label>
 					</th>
 					<td>
@@ -109,11 +113,12 @@ class SHIVLI_User_Profile {
 			<tr>
 				<th>
 					<label>
-						<?php esc_html_e('Days Since Last Login', 'shivora-login-insights'); ?>
+						<?php esc_html_e( 'Days Since Last Login', 'shivora-login-insights' ); ?>
 					</label>
 				</th>
 				<td>
-					<?php if ( '' === $days_since_login ) {
+					<?php
+					if ( '' === $days_since_login ) {
 						esc_html_e(
 							'Never Logged In',
 							'shivora-login-insights'
@@ -122,7 +127,8 @@ class SHIVLI_User_Profile {
 						echo esc_html(
 							$days_since_login
 						);
-					} ?>
+					}
+					?>
 				</td>
 			</tr>
 		</table>
