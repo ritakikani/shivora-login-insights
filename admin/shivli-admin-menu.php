@@ -1,4 +1,5 @@
 <?php
+// Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -78,39 +79,39 @@ class SHIVLI_Admin_Menu {
 	 * @return void
 	 */
 	public function overview_page() {
-		$total_users = count_users();
-		$logged_today = SHIVLI_Helper::get_logged_in_today_count();
+		$total_users     = count_users();
+		$logged_today    = SHIVLI_Helper::get_logged_in_today_count();
 		$never_logged_in = SHIVLI_Helper::get_never_logged_in_count();
-		$inactive_30 = SHIVLI_Helper::get_inactive_users_count( 30 );
-		$inactive_60 = SHIVLI_Helper::get_inactive_users_count( 60 );
-		$inactive_90 = SHIVLI_Helper::get_inactive_users_count( 90 ); ?>
+		$inactive_30     = SHIVLI_Helper::get_inactive_users_count( 30 );
+		$inactive_60     = SHIVLI_Helper::get_inactive_users_count( 60 );
+		$inactive_90     = SHIVLI_Helper::get_inactive_users_count( 90 ); ?>
 
 		<div class="wrap">
 			<h1>
-				<?php esc_html_e('Login Insights', 'shivora-login-insights'); ?>
+				<?php esc_html_e( 'Login Insights', 'shivora-login-insights' ); ?>
 			</h1>
 
 			<table class="widefat striped">
 				<tbody>
 					<tr>
 						<th>
-							<?php esc_html_e('Total Users',	'shivora-login-insights'); ?>
+							<?php esc_html_e( 'Total Users', 'shivora-login-insights' ); ?>
 						</th>
 						<td>
-							<?php echo esc_html($total_users['total_users']); ?>
+							<?php echo esc_html( $total_users['total_users'] ); ?>
 						</td>
 					</tr>
 					<tr>
 						<th>
-							<?php esc_html_e('Logged In Today', 'shivora-login-insights'); ?>
+							<?php esc_html_e( 'Logged In Today', 'shivora-login-insights' ); ?>
 						</th>
 						<td>
-							<?php echo esc_html($logged_today); ?>
+							<?php echo esc_html( $logged_today ); ?>
 						</td>
 					</tr>
 					<tr>
 						<th>
-							<?php esc_html_e('Never Logged In',	'shivora-login-insights'); ?>
+							<?php esc_html_e( 'Never Logged In', 'shivora-login-insights' ); ?>
 						</th>
 						<td>
 							<?php echo esc_html( $never_logged_in ); ?>
@@ -118,26 +119,26 @@ class SHIVLI_Admin_Menu {
 					</tr>
 					<tr>
 						<th>
-							<?php esc_html_e('Inactive 30 Days',	'shivora-login-insights'); ?>
+							<?php esc_html_e( 'Inactive 30 Days', 'shivora-login-insights' ); ?>
 						</th>
 						<td>
-							<?php echo esc_html($inactive_30); ?>
+							<?php echo esc_html( $inactive_30 ); ?>
 						</td>
 					</tr>
 					<tr>
 						<th>
-							<?php esc_html_e('Inactive 60 Days',	'shivora-login-insights'); ?>
+							<?php esc_html_e( 'Inactive 60 Days', 'shivora-login-insights' ); ?>
 						</th>
 						<td>
-							<?php echo esc_html($inactive_60); ?>
+							<?php echo esc_html( $inactive_60 ); ?>
 						</td>
 					</tr>
 					<tr>
 						<th>
-							<?php esc_html_e( 'Inactive 90 Days',	'shivora-login-insights' ); ?>
+							<?php esc_html_e( 'Inactive 90 Days', 'shivora-login-insights' ); ?>
 						</th>
 						<td>
-							<?php echo esc_html($inactive_90); ?>
+							<?php echo esc_html( $inactive_90 ); ?>
 						</td>
 					</tr>
 				</tbody>

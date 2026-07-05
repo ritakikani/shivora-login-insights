@@ -1,4 +1,5 @@
 <?php
+// Exit if accessed directly, rather than through WordPress's uninstall process.
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }

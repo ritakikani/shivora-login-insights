@@ -1,4 +1,5 @@
 <?php
+// Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -38,7 +39,8 @@ class SHIVLI_Inactive_Users_Page {
 				$this,
 				'register_submenu',
 			),
-			25);
+			25
+		);
 	}
 
 	/**
@@ -71,9 +73,11 @@ class SHIVLI_Inactive_Users_Page {
 	 */
 	public function render_page() {
 
+		// Default to 30 days when no filter has been selected yet.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only display filter, no state change.
 		$days = isset( $_GET['days'] ) ? absint( $_GET['days'] ) : 30;
 
-		$timestamp = strtotime(sprintf('-%d days', $days));
+		$timestamp = strtotime( sprintf( '-%d days', $days ) );
 
 		$users = get_users(
 			array(
@@ -87,19 +91,19 @@ class SHIVLI_Inactive_Users_Page {
 
 		<div class="wrap">
 			<h1>
-				<?php esc_html_e('Inactive Users', 'shivora-login-insights'); ?>
+				<?php esc_html_e( 'Inactive Users', 'shivora-login-insights' ); ?>
 			</h1>
 
 			<form method="get">
 				<input type="hidden" name="page"	value="shivli-inactive-users" />
 				<select name="days">
-					<option value="never"><?php esc_html_e('Never Logged In', 'shivora-login-insights'); ?></option>
-					<option value="30" <?php selected( $days, 30 ); ?>><?php esc_html_e('30 Days', 'shivora-login-insights'); ?></option>
-					<option value="60" <?php selected( $days, 60 ); ?>><?php esc_html_e('60 Days', 'shivora-login-insights'); ?></option>
-					<option value="90" <?php selected( $days, 90 ); ?>><?php esc_html_e('90 Days', 'shivora-login-insights'); ?></option>
-					<option value="180" <?php selected( $days, 180 ); ?>><?php esc_html_e('180 Days', 'shivora-login-insights'); ?></option>
+					<option value="never"><?php esc_html_e( 'Never Logged In', 'shivora-login-insights' ); ?></option>
+					<option value="30" <?php selected( $days, 30 ); ?>><?php esc_html_e( '30 Days', 'shivora-login-insights' ); ?></option>
+					<option value="60" <?php selected( $days, 60 ); ?>><?php esc_html_e( '60 Days', 'shivora-login-insights' ); ?></option>
+					<option value="90" <?php selected( $days, 90 ); ?>><?php esc_html_e( '90 Days', 'shivora-login-insights' ); ?></option>
+					<option value="180" <?php selected( $days, 180 ); ?>><?php esc_html_e( '180 Days', 'shivora-login-insights' ); ?></option>
 				</select>
-				<?php submit_button(__( 'Filter', 'shivora-login-insights' ), 'secondary', '',	false); ?>
+				<?php submit_button( __( 'Filter', 'shivora-login-insights' ), 'secondary', '', false ); ?>
 			</form>
 			<br>
 
@@ -116,7 +120,7 @@ class SHIVLI_Inactive_Users_Page {
 					<?php if ( empty( $users ) ) : ?>
 						<tr>
 							<td colspan="4">
-								<?php esc_html_e('No inactive users found.', 'shivora-login-insights'); ?>
+								<?php esc_html_e( 'No inactive users found.', 'shivora-login-insights' ); ?>
 							</td>
 						</tr>
 					<?php else : ?>
@@ -131,20 +135,24 @@ class SHIVLI_Inactive_Users_Page {
 									<?php echo esc_html( $user->user_email ); ?>
 								</td>
 								<td>
-									<?php echo esc_html(
+									<?php
+									echo esc_html(
 										SHIVLI_Helper::format_login_date(
 											SHIVLI_Helper::get_last_login(
 												$user->ID
 											)
 										)
-									); ?>
+									);
+									?>
 								</td>
 								<td>
-									<?php echo esc_html(
+									<?php
+									echo esc_html(
 										SHIVLI_Helper::get_last_login_ip(
 											$user->ID
 										)
-									); ?>
+									);
+									?>
 								</td>
 							</tr>
 						<?php endforeach; ?>

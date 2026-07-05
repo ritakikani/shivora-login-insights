@@ -1,4 +1,5 @@
 <?php
+// Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -76,10 +77,10 @@ class SHIVLI_Admin {
 	 * @return void
 	 */
 	private function init_classes() {
-		$this->menu = new SHIVLI_Admin_Menu();
-		$this->dashboard_widget = new SHIVLI_Dashboard_Widget();
-		$this->settings = new SHIVLI_Settings();
+		$this->menu                = new SHIVLI_Admin_Menu();
+		$this->dashboard_widget    = new SHIVLI_Dashboard_Widget();
+		$this->settings            = new SHIVLI_Settings();
 		$this->inactive_users_page = new SHIVLI_Inactive_Users_Page();
-		$this->export = new SHIVLI_Export();
+		$this->export              = new SHIVLI_Export();
 	}
 }

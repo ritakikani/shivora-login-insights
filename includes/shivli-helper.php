@@ -1,4 +1,5 @@
 <?php
+// Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -84,6 +85,7 @@ class SHIVLI_Helper {
 	 * @return string
 	 */
 	public static function format_login_date( $timestamp ) {
+		// No login has been recorded for this user yet.
 		if ( empty( $timestamp ) ) {
 			return __( 'Never', 'shivora-login-insights' );
 		}
@@ -105,7 +107,7 @@ class SHIVLI_Helper {
 			'today',
 			current_time( 'timestamp' )
 		);
-		$users = get_users(
+		$users       = get_users(
 			array(
 				'meta_key'     => 'shivora_login_insights',
 				'meta_value'   => $today_start,
@@ -132,7 +134,7 @@ class SHIVLI_Helper {
 						'compare' => 'NOT EXISTS',
 					),
 				),
-				'fields' => 'ID',
+				'fields'     => 'ID',
 			)
 		);
 		return count( $users );
@@ -154,7 +156,7 @@ class SHIVLI_Helper {
 				absint( $days )
 			)
 		);
-		$users = get_users(
+		$users     = get_users(
 			array(
 				'meta_key'     => 'shivora_login_insights',
 				'meta_value'   => $timestamp,
@@ -168,34 +170,39 @@ class SHIVLI_Helper {
 	/**
 	 * Get current user IP.
 	 *
-	 * Supports common proxy headers.
+	 * Trusts only REMOTE_ADDR by default, since proxy headers
+	 * such as X-Forwarded-For or Client-IP are supplied by the
+	 * client and can be spoofed by anyone to falsify the login
+	 * IP recorded for audit purposes. Sites that sit behind a
+	 * known, trusted proxy or CDN (which overwrites REMOTE_ADDR
+	 * with the proxy's own address) can opt in to a specific
+	 * header via the `shivli_trusted_ip_header` filter.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @return string
 	 */
 	public static function get_user_ip() {
-		$ip_headers = array(
-			'HTTP_CF_CONNECTING_IP',
-			'HTTP_X_FORWARDED_FOR',
-			'HTTP_CLIENT_IP',
-			'REMOTE_ADDR',
+
+		$header = apply_filters(
+			'shivli_trusted_ip_header',
+			'REMOTE_ADDR'
 		);
 
-		foreach ( $ip_headers as $header ) {
-			if ( empty( $_SERVER[ $header ] ) ) {
-				continue;
-			}
-			$ip = explode(
-				',',
-				sanitize_text_field(
-					wp_unslash(
-						$_SERVER[ $header ]
-					)
-				)
-			);
-			return trim( $ip[0] );
+		// Trusted header is not present on this request.
+		if ( empty( $_SERVER[ $header ] ) ) {
+			return '';
 		}
-		return '';
+
+		$ip = explode(
+			',',
+			sanitize_text_field(
+				wp_unslash(
+					$_SERVER[ $header ]
+				)
+			)
+		);
+
+		return trim( $ip[0] );
 	}
 }

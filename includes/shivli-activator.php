@@ -1,4 +1,5 @@
 <?php
+// Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }

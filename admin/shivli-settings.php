@@ -1,4 +1,5 @@
 <?php
+// Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -100,9 +101,9 @@ class SHIVLI_Settings {
 	 * @return array
 	 */
 	public function sanitize_settings( $input ) {
-		$sanitized = array();
-		$sanitized['track_ip'] = ! empty($input['track_ip']	) ? 1 : 0;
-		$sanitized['dashboard_widget'] = ! empty($input['dashboard_widget']) ? 1 : 0;
+		$sanitized                     = array();
+		$sanitized['track_ip']         = ! empty( $input['track_ip'] ) ? 1 : 0;
+		$sanitized['dashboard_widget'] = ! empty( $input['dashboard_widget'] ) ? 1 : 0;
 
 		$allowed_retention = array(
 			'30',
@@ -111,7 +112,9 @@ class SHIVLI_Settings {
 			'forever',
 		);
 
-		$sanitized['retention'] = isset($input['retention']	) && in_array($input['retention'], $allowed_retention, true)
+		// Restrict to known values so an unexpected or tampered
+		// value can never be persisted to the option.
+		$sanitized['retention'] = isset( $input['retention'] ) && in_array( $input['retention'], $allowed_retention, true )
 			? $input['retention']
 			: 'forever';
 
@@ -129,7 +132,7 @@ class SHIVLI_Settings {
 		$settings = SHIVLI_Helper::get_settings(); ?>
 		<div class="wrap">
 			<h1>
-				<?php esc_html_e( 'Login Insights Settings', 'shivora-login-insights'); ?>
+				<?php esc_html_e( 'Login Insights Settings', 'shivora-login-insights' ); ?>
 			</h1>
 
 			<form method="post" action="options.php" >
@@ -141,42 +144,42 @@ class SHIVLI_Settings {
 						</th>
 						<td>
 							<label>
-								<input type="checkbox" name="shivli_settings[track_ip]" value="1" <?php checked($settings['track_ip'], 1); ?> />
-								<?php esc_html_e('Store user login IP address.',	'shivora-login-insights'); ?>
+								<input type="checkbox" name="shivli_settings[track_ip]" value="1" <?php checked( $settings['track_ip'], 1 ); ?> />
+								<?php esc_html_e( 'Store user login IP address.', 'shivora-login-insights' ); ?>
 							</label>
 						</td>
 					</tr>
 
 					<tr>
 						<th scope="row">
-							<?php esc_html_e( 'Dashboard Widget',	'shivora-login-insights' ); ?>
+							<?php esc_html_e( 'Dashboard Widget', 'shivora-login-insights' ); ?>
 						</th>
 						<td>
 							<label>
-								<input type="checkbox" name="shivli_settings[dashboard_widget]" value="1" <?php checked($settings['dashboard_widget'], 1); ?> />
-								<?php esc_html_e('Show dashboard widget.', 'shivora-login-insights' ); ?>
+								<input type="checkbox" name="shivli_settings[dashboard_widget]" value="1" <?php checked( $settings['dashboard_widget'], 1 ); ?> />
+								<?php esc_html_e( 'Show dashboard widget.', 'shivora-login-insights' ); ?>
 							</label>
 						</td>
 					</tr>
 
 					<tr>
 						<th scope="row">
-							<?php esc_html_e('Retention Period',	'shivora-login-insights'); ?>
+							<?php esc_html_e( 'Retention Period', 'shivora-login-insights' ); ?>
 						</th>
 
 						<td>
 							<select	name="shivli_settings[retention]">
 								<option value="30" <?php selected( $settings['retention'], '30' ); ?>>
-								    <?php esc_html_e('30 Days',	'shivora-login-insights'); ?>
+									<?php esc_html_e( '30 Days', 'shivora-login-insights' ); ?>
 								</option>
 								<option value="60" <?php selected( $settings['retention'], '60' ); ?>>
-									<?php esc_html_e('60 Days',	'shivora-login-insights'); ?>
+									<?php esc_html_e( '60 Days', 'shivora-login-insights' ); ?>
 								</option>
 								<option value="90" <?php selected( $settings['retention'], '90' ); ?>>
-									<?php esc_html_e('90 Days',	'shivora-login-insights'); ?>
+									<?php esc_html_e( '90 Days', 'shivora-login-insights' ); ?>
 								</option>
 								<option value="forever" <?php selected( $settings['retention'], 'forever' ); ?>>
-									<?php esc_html_e('Forever',	'shivora-login-insights'); ?>
+									<?php esc_html_e( 'Forever', 'shivora-login-insights' ); ?>
 								</option>
 							</select>
 						</td>

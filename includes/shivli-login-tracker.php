@@ -1,4 +1,5 @@
 <?php
+// Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -59,6 +60,7 @@ class SHIVLI_Login_Tracker {
 	 */
 	public function track_login( $user_login, $user ) {
 
+		// Bail out if wp_login fired without a valid user object.
 		if ( ! $user instanceof WP_User ) {
 			return;
 		}
