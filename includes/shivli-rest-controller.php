@@ -1,4 +1,10 @@
 <?php
+/**
+ * REST API controller for exposing login activity data.
+ *
+ * @package Shivora_Login_Insights
+ */
+
 // Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -147,7 +153,7 @@ class SHIVLI_REST_Controller {
 	 * Get inactive users.
 	 *
 	 * Endpoint:
-	* /wp-json/shivli/v1/inactive-users?days=30
+	 * /wp-json/shivli/v1/inactive-users?days=30
 	 *
 	 * @since 1.0.0
 	 *

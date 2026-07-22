@@ -1,4 +1,10 @@
 <?php
+/**
+ * Reusable helper methods shared across plugin modules.
+ *
+ * @package Shivora_Login_Insights
+ */
+
 // Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -98,15 +104,16 @@ class SHIVLI_Helper {
 	/**
 	 * Get logged in users count today.
 	 *
+	 * Uses the site's local midnight as the "today" boundary, expressed
+	 * as a true Unix timestamp so it compares correctly against login
+	 * timestamps, which are stored via time().
+	 *
 	 * @since 1.0.0
 	 *
 	 * @return int
 	 */
 	public static function get_logged_in_today_count() {
-		$today_start = strtotime(
-			'today',
-			current_time( 'timestamp' )
-		);
+		$today_start = current_datetime()->setTime( 0, 0, 0 )->getTimestamp();
 		$users       = get_users(
 			array(
 				'meta_key'     => 'shivora_login_insights',

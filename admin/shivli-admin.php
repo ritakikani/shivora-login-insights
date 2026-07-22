@@ -1,4 +1,10 @@
 <?php
+/**
+ * Admin loader that includes and initializes all admin-only modules.
+ *
+ * @package Shivora_Login_Insights
+ */
+
 // Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

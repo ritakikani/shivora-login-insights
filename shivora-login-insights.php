@@ -3,11 +3,15 @@
  * Plugin Name: Shivora Login Insights
  * Plugin URI: https://wordpress.org/plugins/shivora-login-insights/
  * Description: Track user last login date, login IP address, inactive users and activity reports.
- * Version: 1.0.0
+ * Version: 1.0.1
+ * Requires at least: 6.0
+ * Requires PHP: 7.4
  * Author: Rita Kikani
  * License: GPL v2 or later
  * Text Domain: shivora-login-insights
  * Domain Path: /languages
+ *
+ * @package Shivora_Login_Insights
  */
 
 // Exit if accessed directly, outside of the WordPress bootstrap.
@@ -33,7 +37,7 @@ class SHIVLI_Plugin {
 	 *
 	 * @var self|null
 	 */
-	private static $_instance = null;
+	private static $instance = null;
 
 	/**
 	 * Login tracker module.
@@ -89,11 +93,11 @@ class SHIVLI_Plugin {
 	public static function instance() {
 
 		// Singleton: create the instance once and reuse it on every call.
-		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new self();
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
 		}
 
-		return self::$_instance;
+		return self::$instance;
 	}
 
 	/**
@@ -232,11 +236,14 @@ class SHIVLI_Plugin {
 /**
  * Main plugin instance.
  *
+ * Standard bootstrap accessor function kept in the same file as the class
+ * it wraps so the plugin has a single, predictable entry point.
+ *
  * @since 1.0.0
  *
  * @return SHIVLI_Plugin
  */
-function SHIVLI() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
+function SHIVLI() { // phpcs:ignore Universal.Files.SeparateFunctionsFromOO.Mixed, WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
 
 	return SHIVLI_Plugin::instance();
 }

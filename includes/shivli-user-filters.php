@@ -1,4 +1,10 @@
 <?php
+/**
+ * Inactive-user filter dropdown on the Users list screen.
+ *
+ * @package Shivora_Login_Insights
+ */
+
 // Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

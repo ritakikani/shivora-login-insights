@@ -1,11 +1,11 @@
 === Shivora Login Insights ===
-Contributors: kikanirita
+Contributors: kikanirita, alkesh7
 Donate link: https://buymeacoffee.com/sanganireeu
 Tags: login, last login, users, user activity, user management
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -114,6 +114,12 @@ https://buymeacoffee.com/sanganireeu
 
 == Changelog ==
 
+= 1.0.1 =
+
+* Fixed a timestamp inconsistency where login times were recorded with the site's UTC offset applied but compared using plain UTC-based calculations, which could skew "inactive users" and "logged in today" results on sites with a non-zero UTC offset.
+* Added file-level documentation headers throughout the codebase for improved code readability.
+* Minor coding standards clean-up.
+
 = 1.0.0 =
 
 * Initial release
@@ -129,6 +135,10 @@ https://buymeacoffee.com/sanganireeu
 * Translation support
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+
+Fixes a timestamp calculation inconsistency affecting inactive user detection on sites with a non-zero UTC offset.
 
 = 1.0.0 =
 

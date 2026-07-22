@@ -1,4 +1,10 @@
 <?php
+/**
+ * Login tracker used to record user login time and IP address.
+ *
+ * @package Shivora_Login_Insights
+ */
+
 // Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -67,11 +73,15 @@ class SHIVLI_Login_Tracker {
 
 		/**
 		 * Save login timestamp.
+		 *
+		 * Stored as a true Unix (UTC) timestamp so it always compares
+		 * correctly against strtotime()-based inactivity calculations,
+		 * regardless of the site's UTC offset setting.
 		 */
 		update_user_meta(
 			$user->ID,
 			'shivora_login_insights',
-			current_time( 'timestamp' )
+			time()
 		);
 
 		/**

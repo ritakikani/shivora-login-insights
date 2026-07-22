@@ -1,4 +1,10 @@
 <?php
+/**
+ * Fired when the plugin is uninstalled. Removes all plugin data.
+ *
+ * @package Shivora_Login_Insights
+ */
+
 // Exit if accessed directly, rather than through WordPress's uninstall process.
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Inactive Users admin page listing and filtering by inactivity period.
+ *
+ * @package Shivora_Login_Insights
+ */
+
 // Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

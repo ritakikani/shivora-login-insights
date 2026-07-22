@@ -1,4 +1,10 @@
 <?php
+/**
+ * Login information section on the user profile screen.
+ *
+ * @package Shivora_Login_Insights
+ */
+
 // Exit if accessed directly, outside of the WordPress bootstrap.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -71,7 +77,7 @@ class SHIVLI_User_Profile {
 		if ( ! empty( $last_login ) ) {
 
 			$days_since_login = floor(
-				( current_time( 'timestamp' ) - $last_login ) / DAY_IN_SECONDS
+				( time() - $last_login ) / DAY_IN_SECONDS
 			);
 		} ?>
 
