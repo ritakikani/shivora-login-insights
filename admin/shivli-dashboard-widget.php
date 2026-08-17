@@ -147,9 +147,7 @@ class SHIVLI_Dashboard_Widget {
 							<td>
 								<?php echo esc_html(
 									SHIVLI_Helper::format_login_date(
-										SHIVLI_Helper::get_last_login(
-											$user->ID
-										)
+										SHIVLI_Helper::get_last_login( $user->ID )
 									)
 								); ?>
 							</td>
@@ -160,7 +158,7 @@ class SHIVLI_Dashboard_Widget {
 		<?php endif; ?>
 		<p>
 			<a href="<?php echo esc_url( admin_url( 'users.php?page=shivli-overview' ) ); ?>">
-				<?php esc_html_e('View Full Report',	'shivora-login-insights'); ?>
+				<?php esc_html_e('View Full Report', 'shivora-login-insights'); ?>
 			</a>
 		</p>
 		<?php

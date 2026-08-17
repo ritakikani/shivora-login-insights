@@ -1,0 +1,96 @@
+.shivli-dashboard-cards {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(180px, 1fr));
+	gap: 16px;
+	margin: 20px 0;
+}
+
+.shivli-stat-card {
+	box-sizing: border-box;
+	width: 100%;
+	margin: 0;
+	padding: 20px;
+}
+
+.shivli-stat-card h2 {
+	margin-top: 0;
+}
+
+.shivli-stat-value {
+	font-size: 28px;
+	font-weight: 600;
+	margin: 0;
+}
+
+.shivli-dashboard-section {
+	margin-top: 30px;
+}
+
+.shivli-login-chart {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 20px;
+	min-height: 240px;
+	padding: 30px 20px 20px;
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+}
+
+.shivli-chart-column {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+	min-width: 40px;
+	height: 210px;
+}
+
+.shivli-chart-count {
+	margin-bottom: 6px;
+	font-weight: 600;
+}
+
+.shivli-chart-bar {
+	width: 42px;
+	min-height: 4px;
+	background: #3858e9;
+	border-radius: 4px 4px 0 0;
+}
+
+.shivli-chart-label {
+	margin-top: 8px;
+	font-size: 12px;
+	color: #50575e;
+}
+
+@media screen and (max-width: 782px) {
+
+	.shivli-login-chart {
+		gap: 8px;
+		padding-left: 8px;
+		padding-right: 8px;
+	}
+
+	.shivli-chart-bar {
+		width: 28px;
+	}
+
+	.shivli-chart-label {
+		font-size: 10px;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	.shivli-dashboard-cards {
+		grid-template-columns: repeat(2, minmax(180px, 1fr));
+	}
+}
+
+@media screen and (max-width: 782px) {
+	.shivli-dashboard-cards {
+		grid-template-columns: 1fr;
+	}
+}

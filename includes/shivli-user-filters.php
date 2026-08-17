@@ -58,9 +58,7 @@ class SHIVLI_User_Filters {
 			return;
 		}
 
-		$current_filter = isset( $_GET['shivli_inactive'] )
-			? sanitize_text_field( wp_unslash( $_GET['shivli_inactive'] ) )
-			: ''; ?>
+		$current_filter = isset( $_GET['shivli_inactive'] ) ? sanitize_text_field( wp_unslash( $_GET['shivli_inactive'] ) ) : ''; ?>
 
 		<select name="shivli_inactive">
 			<option value="">
@@ -113,11 +111,7 @@ class SHIVLI_User_Filters {
 			return;
 		}
 
-		$inactive_days = sanitize_text_field(
-			wp_unslash(
-				$_GET['shivli_inactive']
-			)
-		);
+		$inactive_days = sanitize_text_field( wp_unslash( $_GET['shivli_inactive'] ) );
 
 		/**
 		 * Show users who never logged in.
@@ -135,9 +129,7 @@ class SHIVLI_User_Filters {
 			return;
 		}
 
-		$inactive_days = absint(
-			$inactive_days
-		);
+		$inactive_days = absint( $inactive_days );
 
 		if ( empty( $inactive_days ) ) {
 			return;
@@ -153,19 +145,10 @@ class SHIVLI_User_Filters {
 			)
 		);
 
-		$query->set(
-			'meta_key',
-			'shivora_login_insights'
-		);
+		$query->set( 'meta_key', 'shivora_login_insights' );
 
-		$query->set(
-			'meta_value',
-			$timestamp
-		);
+		$query->set( 'meta_value', $timestamp );
 
-		$query->set(
-			'meta_compare',
-			'<'
-		);
+		$query->set( 'meta_compare', '<' );
 	}
 }

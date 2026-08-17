@@ -63,16 +63,10 @@ class SHIVLI_User_Columns {
 	 * @return array
 	 */
 	public function add_columns( $columns ) {
-		$columns['shivora_login_insights'] = __(
-			'Last Login',
-			'shivora-login-insights'
-		);
+		$columns['shivora_login_insights'] = __( 'Last Login', 'shivora-login-insights' );
 		$settings = SHIVLI_Helper::get_settings();
 		if ( ! empty( $settings['track_ip'] ) ) {
-			$columns['shivli_last_login_ip'] = __(
-				'Login IP',
-				'shivora-login-insights'
-			);
+			$columns['shivli_last_login_ip'] = __( 'Login IP', 'shivora-login-insights' );
 		}
 		return $columns;
 	}
@@ -91,21 +85,13 @@ class SHIVLI_User_Columns {
 	public function render_columns($value,	$column_name, $user_id) {
 		switch ( $column_name ) {
 			case 'shivora_login_insights':
-				$timestamp = SHIVLI_Helper::get_last_login(
-					$user_id
-				);
+				$timestamp = SHIVLI_Helper::get_last_login( $user_id );
 				return esc_html(
-					SHIVLI_Helper::format_login_date(
-						$timestamp
-					)
+					SHIVLI_Helper::format_login_date( $timestamp )
 				);
 			case 'shivli_last_login_ip':
-				$ip = SHIVLI_Helper::get_last_login_ip(
-					$user_id
-				);
-				return ! empty( $ip )
-					? esc_html( $ip )
-					: '&mdash;';
+				$ip = SHIVLI_Helper::get_last_login_ip( $user_id );
+				return ! empty( $ip ) ? esc_html( $ip ) : '&mdash;';
 		}
 		return $value;
 	}
@@ -148,13 +134,7 @@ class SHIVLI_User_Columns {
 		if ( 'shivora_login_insights' !== $order_by ) {
 			return;
 		}
-		$query->set(
-			'meta_key',
-			'shivora_login_insights'
-		);
-		$query->set(
-			'orderby',
-			'meta_value_num'
-		);
+		$query->set( 'meta_key', 'shivora_login_insights' );
+		$query->set( 'orderby', 'meta_value_num' );
 	}
 }

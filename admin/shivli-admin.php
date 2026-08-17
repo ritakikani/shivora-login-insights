@@ -64,6 +64,7 @@ class SHIVLI_Admin {
 	 */
 	private function includes() {
 		require_once SHIVLI_PLUGIN_DIR . '/admin/shivli-admin-menu.php';
+		require_once SHIVLI_PLUGIN_DIR . '/admin/shivli-login-history-page.php';
 		require_once SHIVLI_PLUGIN_DIR . '/admin/shivli-dashboard-widget.php';
 		require_once SHIVLI_PLUGIN_DIR . '/admin/shivli-settings.php';
 		require_once SHIVLI_PLUGIN_DIR . '/admin/shivli-inactive-users-page.php';
@@ -77,6 +78,7 @@ class SHIVLI_Admin {
 	 */
 	private function init_classes() {
 		$this->menu = new SHIVLI_Admin_Menu();
+		$this->login_history_page = new SHIVLI_Login_History_Page();
 		$this->dashboard_widget = new SHIVLI_Dashboard_Widget();
 		$this->settings = new SHIVLI_Settings();
 		$this->inactive_users_page = new SHIVLI_Inactive_Users_Page();

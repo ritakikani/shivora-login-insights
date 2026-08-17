@@ -4,12 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Export class.
- *
- * Responsible for:
- * - Registering export submenu.
- * - Exporting login activity.
- * - Generating CSV downloads.
+ * Export functionality.
  *
  * @since 1.0.0
  */
@@ -21,169 +16,103 @@ class SHIVLI_Export {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		$this->hooks();
-	}
-
-	/**
-	 * Register hooks.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return void
-	 */
-	private function hooks() {
 		add_action(
-			'admin_menu',
-			array(
-				$this,
-				'register_submenu',
-			),
-			30
+			'admin_post_shivli_export_users',
+			array( $this, 'export_users' )
 		);
+
 		add_action(
-			'admin_init',
-			array(
-				$this,
-				'handle_export',
-			)
+			'admin_post_shivli_export_login_history',
+			array( $this, 'export_login_history' )
 		);
 	}
 
 	/**
-	 * Register submenu page.
+	 * Export login history CSV.
 	 *
-	 * @since 1.0.0
-	 *
-	 * @return void
-	 */
-	public function register_submenu() {
-		add_submenu_page(
-			'shivli-overview',
-			__( 'Export', 'shivora-login-insights' ),
-			__( 'Export', 'shivora-login-insights' ),
-			'list_users',
-			'shivli-export',
-			array(
-				$this,
-				'render_page',
-			)
-		);
-	}
-
-	/**
-	 * Render export page.
-	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @return void
 	 */
-	public function render_page() { ?>
-		<div class="wrap">
-			<h1>
-				<?php esc_html_e('Export Login Activity', 'shivora-login-insights'); ?>
-			</h1>
-
-			<p>
-				<?php esc_html_e('Export all tracked login activity as a CSV file.', 'shivora-login-insights'); ?>
-			</p>
-
-			<form method="post">
-				<?php wp_nonce_field('shivli_export_users', 'shivli_export_nonce');?>
-				<input type="hidden" name="shivli_action" value="export_users" />
-				<?php submit_button(__( 'Export CSV', 'shivora-login-insights' )); ?>
-			</form>
-
-		</div>
-		<?php
-	}
-
-	/**
-	 * Handle export request.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return void
-	 */
-	public function handle_export() {
-
-		if ( empty( $_POST['shivli_action'] ) ) {
-			return;
-		}
-
-		if ( 'export_users' !== $_POST['shivli_action'] ) {
-			return;
-		}
+	public function export_login_history() {
 
 		if ( ! current_user_can( 'list_users' ) ) {
-			return;
+			wp_die(
+				esc_html__(
+					'You do not have permission to export login history.',
+					'shivora-login-insights'
+				)
+			);
 		}
 
-		check_admin_referer(
-			'shivli_export_users',
-			'shivli_export_nonce'
-		);
+		check_admin_referer( 'shivli_export_login_history' );
 
-		$this->export_csv();
-	}
+		$search = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
 
-	/**
-	 * Export CSV.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return void
-	 */
-	private function export_csv() {
+		$device = isset( $_GET['device'] ) ? sanitize_text_field( wp_unslash( $_GET['device'] ) ) : '';
 
-		$users = get_users();
+		$browser = isset( $_GET['browser'] ) ? sanitize_text_field( wp_unslash( $_GET['browser'] ) ) : '';
 
-		$filename = sprintf(
-			'shivli-export-%s.csv',
-			wp_date( 'Y-m-d-H-i-s' )
+		$date_from = isset( $_GET['date_from'] ) ? sanitize_text_field( wp_unslash( $_GET['date_from'] ) ) : '';
+
+		$date_to = isset( $_GET['date_to'] ) ? sanitize_text_field( wp_unslash( $_GET['date_to'] ) ) : '';
+
+		$history = SHIVLI_Login_History::get_history(
+			array(
+				'search'    => $search,
+				'device'    => $device,
+				'browser'   => $browser,
+				'date_from' => $date_from,
+				'date_to'   => $date_to,
+				'limit'     => 100000,
+				'offset'    => 0,
+			)
 		);
 
 		nocache_headers();
-		header( 'Content-Type: text/csv; charset=utf-8' );
-		header( 'Content-Disposition: attachment; filename=' . $filename );
 
-		$output = fopen(
-			'php://output',
-			'w'
-		);
+		header( 'Content-Type: text/csv; charset=utf-8' );
+		header( 'Content-Disposition: attachment; filename=shivora-login-history-' . gmdate( 'Y-m-d' ) . '.csv' );
+
+		$output = fopen( 'php://output', 'w' );
 
 		fputcsv(
 			$output,
 			array(
-				'User ID',
-				'Username',
-				'Display Name',
-				'Email',
-				'Last Login',
-				'Login IP',
+				__( 'User ID', 'shivora-login-insights' ),
+				__( 'Username', 'shivora-login-insights' ),
+				__( 'Email', 'shivora-login-insights' ),
+				__( 'Login Date', 'shivora-login-insights' ),
+				__( 'IP Address', 'shivora-login-insights' ),
+				__( 'Browser', 'shivora-login-insights' ),
+				__( 'Operating System', 'shivora-login-insights' ),
+				__( 'Device', 'shivora-login-insights' ),
+				__( 'User Agent', 'shivora-login-insights' ),
 			)
 		);
 
-		foreach ( $users as $user ) {
+		foreach ( $history as $login ) {
+
+			$user = get_user_by( 'id', absint( $login->user_id ) );
 
 			fputcsv(
 				$output,
 				array(
-					$user->ID,
-					$user->user_login,
-					$user->display_name,
-					$user->user_email,
-					SHIVLI_Helper::format_login_date(
-						SHIVLI_Helper::get_last_login(
-							$user->ID
-						)
-					),
-					SHIVLI_Helper::get_last_login_ip(
-						$user->ID
-					),
+					$login->user_id,
+					$user ? $user->user_login : '',
+					$user ? $user->user_email : '',
+					$login->login_time,
+					$login->ip_address,
+					$login->browser,
+					$login->os,
+					$login->device,
+					$login->user_agent,
 				)
 			);
 		}
+
 		fclose( $output );
+
 		exit;
 	}
 }

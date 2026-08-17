@@ -3,9 +3,9 @@ Contributors: kikanirita
 Donate link: https://buymeacoffee.com/sanganireeu
 Tags: login, last login, users, user activity, user management
 Requires at least: 6.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -113,6 +113,22 @@ https://buymeacoffee.com/sanganireeu
 6. CSV export functionality
 
 == Changelog ==
+
+= 1.1.0 =
+
+* New: Added login history retention settings.
+* New: Added automatic daily cleanup of old login history.
+* New: Added manual "Clear All Login History" option for administrators.
+* New: Added user-specific login history view.
+* New: Added dashboard login statistics.
+* New: Added unique IP address statistics.
+* New: Added device-based login statistics for Desktop, Mobile, and Tablet.
+* New: Added a 7-day login activity chart.
+* Improved: Added dedicated admin CSS for a cleaner and responsive dashboard layout.
+* Improved: Added secure nonce and capability checks for login history deletion.
+* Improved: Improved dashboard visibility and login activity insights.
+* Fixed: Improved settings handling for login history retention.
+* Fixed: Improved compatibility with existing plugin installations during updates.
 
 = 1.0.0 =
 

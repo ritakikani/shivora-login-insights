@@ -3,7 +3,7 @@
  * Plugin Name: Shivora Login Insights
  * Plugin URI: https://wordpress.org/plugins/shivora-login-insights/
  * Description: Track user last login date, login IP address, inactive users and activity reports.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: Rita Kikani
  * License: GPL v2 or later
  * Text Domain: shivora-login-insights
@@ -16,12 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Main plugin class.
- *
- * Responsible for:
- * - Defining plugin constants.
- * - Loading required files.
- * - Initializing plugin modules.
- * - Registering activation hooks.
  *
  * @since 1.0.0
  */
@@ -79,8 +73,6 @@ class SHIVLI_Plugin {
 	/**
 	 * Get plugin instance.
 	 *
-	 * Ensures only one instance of the plugin is loaded.
-	 *
 	 * @since 1.0.0
 	 *
 	 * @return self
@@ -96,8 +88,6 @@ class SHIVLI_Plugin {
 
 	/**
 	 * Constructor.
-	 *
-	 * Load plugin dependencies and initialize modules.
 	 *
 	 * @since 1.0.0
 	 */
@@ -120,9 +110,20 @@ class SHIVLI_Plugin {
 	 * @return void
 	 */
 	private function hooks() {
+
 		register_activation_hook(
 			__FILE__,
 			array( $this, 'activate' )
+		);
+
+		add_action(
+			'plugins_loaded',
+			array( $this, 'maybe_upgrade' )
+		);
+
+		add_action(
+			'shivli_cleanup_login_history',
+			array( 'SHIVLI_Login_History', 'run_cleanup' )
 		);
 	}
 
@@ -136,7 +137,7 @@ class SHIVLI_Plugin {
 	private function define_constants() {
 
 		if ( ! defined( 'SHIVLI_VERSION' ) ) {
-			define( 'SHIVLI_VERSION', '1.0.0' );
+			define( 'SHIVLI_VERSION', '1.1.0' );
 		}
 
 		if ( ! defined( 'SHIVLI_PLUGIN_FILE' ) ) {
@@ -165,9 +166,6 @@ class SHIVLI_Plugin {
 	/**
 	 * Include required files.
 	 *
-	 * Keeping all includes in a single method
-	 * makes maintenance easier.
-	 *
 	 * @since 1.0.0
 	 *
 	 * @return void
@@ -177,20 +175,19 @@ class SHIVLI_Plugin {
 		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-activator.php';
 		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-helper.php';
 		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-login-tracker.php';
+		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-login-history.php';
 		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-user-columns.php';
 		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-user-profile.php';
 		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-user-filters.php';
 		require_once SHIVLI_PLUGIN_DIR . '/includes/shivli-rest-controller.php';
-
+		
 		if ( is_admin() ) {
 			require_once SHIVLI_PLUGIN_DIR . '/admin/shivli-admin.php';
 		}
 	}
+
 	/**
 	 * Initialize plugin classes.
-	 *
-	 * Each module is responsible for registering
-	 * its own actions and filters.
 	 *
 	 * @since 1.0.0
 	 *
@@ -208,6 +205,7 @@ class SHIVLI_Plugin {
 			$this->admin = new SHIVLI_Admin();
 		}
 	}
+
 	/**
 	 * Plugin activation callback.
 	 *
@@ -218,6 +216,45 @@ class SHIVLI_Plugin {
 	public function activate() {
 
 		SHIVLI_Activator::activate();
+
+		if ( ! wp_next_scheduled( 'shivli_cleanup_login_history' ) ) {
+
+			wp_schedule_event( time(), 'daily', 'shivli_cleanup_login_history' );
+		}
+	}
+
+	/**
+	 * Run database/plugin upgrades.
+	 *
+	 * This runs when an existing installation is updated
+	 * from an older version to the current version.
+	 *
+	 * @since 1.1.0
+	 *
+	 * @return void
+	 */
+	public function maybe_upgrade() {
+
+		$installed_version = get_option(
+			'shivli_version',
+			'1.0.0'
+		);
+
+		if ( version_compare(
+			$installed_version,
+			SHIVLI_VERSION,
+			'<'
+		) ) {
+
+			SHIVLI_Activator::activate();
+			/*
+			* Schedule login history cleanup for existing installations.
+			*/
+			if ( ! wp_next_scheduled( 'shivli_cleanup_login_history' ) ) {
+				wp_schedule_event( time(), 'daily', 'shivli_cleanup_login_history' );
+			}
+			update_option( 'shivli_version', SHIVLI_VERSION );
+		}
 	}
 }
 
@@ -229,7 +266,6 @@ class SHIVLI_Plugin {
  * @return SHIVLI_Plugin
  */
 function SHIVLI() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid
-
 	return SHIVLI_Plugin::instance();
 }
 

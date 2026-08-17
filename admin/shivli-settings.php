@@ -100,20 +100,28 @@ class SHIVLI_Settings {
 	 * @return array
 	 */
 	public function sanitize_settings( $input ) {
+
 		$sanitized = array();
-		$sanitized['track_ip'] = ! empty($input['track_ip']	) ? 1 : 0;
-		$sanitized['dashboard_widget'] = ! empty($input['dashboard_widget']) ? 1 : 0;
+
+		$sanitized['track_ip'] = ! empty( $input['track_ip'] ) ? 1 : 0;
+
+		$sanitized['dashboard_widget'] = ! empty( $input['dashboard_widget'] ) ? 1 : 0;
 
 		$allowed_retention = array(
 			'30',
 			'60',
 			'90',
+			'180',
+			'365',
 			'forever',
 		);
 
-		$sanitized['retention'] = isset($input['retention']	) && in_array($input['retention'], $allowed_retention, true)
-			? $input['retention']
-			: 'forever';
+		$sanitized['retention'] = isset( $input['retention'] )
+			&& in_array(
+				$input['retention'],
+				$allowed_retention,
+				true
+			) ? $input['retention'] : 'forever';
 
 		return $sanitized;
 	}
@@ -161,24 +169,41 @@ class SHIVLI_Settings {
 
 					<tr>
 						<th scope="row">
-							<?php esc_html_e('Retention Period',	'shivora-login-insights'); ?>
+							<label for="retention">
+								<?php esc_html_e( 'Login History Retention', 'shivora-login-insights' ); ?>
+							</label>
 						</th>
 
 						<td>
-							<select	name="shivli_settings[retention]">
-								<option value="30" <?php selected( $settings['retention'], '30' ); ?>>
-								    <?php esc_html_e('30 Days',	'shivora-login-insights'); ?>
+							<select name="shivli_settings[retention]" id="retention" >
+								<option value="30" <?php selected( $settings['retention'], '30' ); ?> >
+									<?php esc_html_e( '30 Days', 'shivora-login-insights' ); ?>
 								</option>
-								<option value="60" <?php selected( $settings['retention'], '60' ); ?>>
-									<?php esc_html_e('60 Days',	'shivora-login-insights'); ?>
+
+								<option value="60" <?php selected( $settings['retention'], '60' ); ?> >
+									<?php esc_html_e( '60 Days', 'shivora-login-insights' ); ?>
 								</option>
-								<option value="90" <?php selected( $settings['retention'], '90' ); ?>>
-									<?php esc_html_e('90 Days',	'shivora-login-insights'); ?>
+
+								<option value="90" <?php selected( $settings['retention'], '90' ); ?> >
+									<?php esc_html_e( '90 Days', 'shivora-login-insights' ); ?>
 								</option>
-								<option value="forever" <?php selected( $settings['retention'], 'forever' ); ?>>
-									<?php esc_html_e('Forever',	'shivora-login-insights'); ?>
+
+								<option value="180" <?php selected( $settings['retention'], '180' ); ?>>
+									<?php esc_html_e( '180 Days', 'shivora-login-insights' ); ?>
+								</option>
+
+								<option value="365" <?php selected( $settings['retention'], '365' ); ?> >
+									<?php esc_html_e( '1 Year', 'shivora-login-insights' ); ?>
+								</option>
+
+								<option value="forever" <?php selected( $settings['retention'], 'forever' ); ?> >
+									<?php esc_html_e( 'Keep Forever', 'shivora-login-insights' ); ?>
 								</option>
 							</select>
+
+							<p class="description">
+								<?php esc_html_e( 'Automatically delete login history older than the selected period.', 'shivora-login-insights' ); ?>
+							</p>
 						</td>
 					</tr>
 				</table>

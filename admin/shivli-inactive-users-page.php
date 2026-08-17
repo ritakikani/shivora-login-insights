@@ -140,11 +140,7 @@ class SHIVLI_Inactive_Users_Page {
 									); ?>
 								</td>
 								<td>
-									<?php echo esc_html(
-										SHIVLI_Helper::get_last_login_ip(
-											$user->ID
-										)
-									); ?>
+									<?php echo esc_html( SHIVLI_Helper::get_last_login_ip( $user->ID ) ); ?>
 								</td>
 							</tr>
 						<?php endforeach; ?>
